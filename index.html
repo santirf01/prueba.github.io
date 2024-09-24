@@ -136,15 +136,12 @@
                     <option value="Exp7">Experimento 7</option>
                 </select>
             </td>
-            <td id="selectContainer">
-                <!-- Aquí se cargará el segundo select -->
-            </td>
         </tr>
         <tr>
-        <td colspan="2">
-            <div id="contenido"></div>
-        </td>
-    </tr>
+            <td colspan="2">
+                <div id="contenido"></div>
+            </td>
+        </tr>
     </table>
 
     <div class="card">
@@ -169,7 +166,6 @@
     
 <!-- Script para cambiar las imágenes y los audios según el experimento seleccionado -->
 <script>
-        var selectContainer = document.getElementById("selectContainer");
         var secondSelectCreated = false;
 
         // Función para cargar contenido directamente
@@ -200,7 +196,7 @@
             // Generar las URLs para "First steps" y "Final steps" dinámicamente
             const firstStepsUrl = `${baseUrl}${experiment}/${experiment}_first_steps.html`;
             const finalStepsUrl = `${baseUrl}${experiment}/${experiment}_final_steps.html`;
-        
+            document.getElementById("output").innerHTML = firstStepsUrl;
             // Cargar las dos URLs
             loadContent(firstStepsUrl, finalStepsUrl);
         
