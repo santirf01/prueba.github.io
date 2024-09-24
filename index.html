@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -10,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <!-- CSS para estilo -->
     <style>
-    body {
+        body {
             font-family: 'Roboto', sans-serif;
             background-color: #f4f7fa;
             margin: 0;
@@ -118,17 +117,7 @@
         </tr>
     </table>
 
-    <!--<div class="grid">
-        <div class="card">
-            <h2>UMAP - Primeros Steps</h2>
-            <img id="umapStart" src="umap_images/experimento1_start.png" alt="UMAP Primeros Steps">
-        </div>
-        <div class="card">
-            <h2>UMAP - Últimos Steps</h2>
-            <img id="umapEnd" src="umap_images/experimento1_end.png" alt="UMAP Últimos Steps">
-        </div>
-    </div>-->
-        <div class="card">
+    <div class="card">
         <h2>Audio Original vs. Fake</h2>
         <h3>Audio Original</h3>
         <audio id="audioOriginal" controls>
@@ -151,175 +140,62 @@
 <!-- Script para cambiar las imágenes y los audios según el experimento seleccionado -->
 <script>
         var selectContainer = document.getElementById("selectContainer");
-       var secondSelectCreated = false; // Variable para controlar si se ha creado el segundo select
-        // Función para cargar el contenido según la selección
+        var secondSelectCreated = false;
+
+        // Función para cargar contenido directamente
         function loadContent(url) {
             var contenidoDiv = document.getElementById("contenido");
             if (url) {
                 contenidoDiv.innerHTML = '<iframe src="' + url + '" width="840" height="640"></iframe>';
             } else {
-                contenidoDiv.innerHTML = ""; // Limpiar el contenido si no se selecciona nada
+                contenidoDiv.innerHTML = ""; 
             }
         }
- function updateSecondSelect(optionsHtml) {
-        selectContainer.innerHTML = optionsHtml;
-    }        
-function showCategory(category) {
-    var contenidoDiv = document.getElementById("contenido");
-    
-    // Limpia el contenido del primer select cada vez que se elige una nueva categoría
-    contenidoDiv.innerHTML = "";
 
-    switch (category) {
-        case "Experimento5":
-            if (!secondSelectCreated) {
-                var selectHtml = createSelect("Image_exp5");
-                 updateSecondSelect(selectHtml);
-                secondSelectCreated = true;
-            }else {
-                var selectHtml = createSelect("Image_exp5"); 
-                updateSecondSelect(selectHtml);
-            }
-            document.getElementById("Image_exp5").selectedIndex = 0;
-            break;
-        case "Experimento6":
-            if (!secondSelectCreated) {
-                var selectHtml = createSelect("Image_exp6");
-                 updateSecondSelect(selectHtml);
-                secondSelectCreated = true;
-            }else {
-               var selectHtml = createSelect("Image_exp6");
-                updateSecondSelect(selectHtml);
-            }
-            document.getElementById("Image_exp6").selectedIndex = 0;
-            break;
-        case "Experimento7":
-            if (!secondSelectCreated) {
-                var selectHtml = createSelect("Image_exp7");
-                 updateSecondSelect(selectHtml);
-                secondSelectCreated = true;
-            }else {
-            var selectHtml = createSelect("Image_exp7");
-                 updateSecondSelect(selectHtml);
-            }
-            document.getElementById("Image_exp7").selectedIndex = 0;
-            break;
-        case "Experimento1":
-            if (!secondSelectCreated) {
-                var selectHtml = createSelect("Image_exp1");
-                 updateSecondSelect(selectHtml);
-                secondSelectCreated = true;
-            }else {
-                 var selectHtml = createSelect("Image_exp1");
-                 updateSecondSelect(selectHtml);
-            }
-            document.getElementById("Image_exp1").selectedIndex = 0;
-            break;
-        case "Experimento2":
-            if (!secondSelectCreated) {
-                var selectHtml = createSelect("Image_exp2");
-                 updateSecondSelect(selectHtml);
-                secondSelectCreated = true;
-            }else {
-                var selectHtml = createSelect("Image_exp2");
-                 updateSecondSelect(selectHtml);
-            }
-            document.getElementById("Image_exp2").selectedIndex = 0;
-            break;
-        case "Experimento3":
-            if (!secondSelectCreated) {
-                var selectHtml = createSelect("Image_exp3");
-                 updateSecondSelect(selectHtml);
-                secondSelectCreated = true;
-            }else {
-                var selectHtml = createSelect("Image_exp3");
-                 updateSecondSelect(selectHtml);
-            }
-            document.getElementById("Image_exp3").selectedIndex = 0;
-            break;
-        case "Experimento4":
-            if (!secondSelectCreated) {
-                var selectHtml = createSelect("Image_exp4");
-                 updateSecondSelect(selectHtml);
-                secondSelectCreated = true;
-            }else {
-                var selectHtml = createSelect("Image_exp4");
-                 updateSecondSelect(selectHtml);
-            }
-            document.getElementById("Image_exp4").selectedIndex = 0;
-            break;
-        default:
-            // Si no se selecciona ninguna categoría, limpiar el contenido del segundo select
-            selectContainer.innerHTML = "";
-            secondSelectCreated = false;
-            break;
-    }
-}
-
-        function createSelect(selectId) {
-            if (selectId==="Image_exp5"){
-                var selectHtml = '<select id="' + selectId + '" onchange="loadContent(this.value)">';
-                selectHtml += '<option value="">Selecciona una imagen de Librivox</option>';
-                selectHtml += '<option value="https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp5/Exp5_first_steps.html">First steps</option>';
-                selectHtml += '<option value="https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp5/Exp5_final_steps.html">Final steps</option>';
-                selectHtml += '</select>';
-                return selectHtml;
-            }else if (selectId==="Image_exp6"){
-                var selectHtml = '<select id="' + selectId + '" onchange="loadContent(this.value)">';
-                selectHtml += '<option value="">Selecciona la clasificación</option>';
-                selectHtml += '<option value="https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp6/Exp6_first_steps.html">First steps</option>';
-                selectHtml += '<option value="https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp6/Exp6_final_steps.html">Final steps</option>';                
-                selectHtml += '</select>';
-                return selectHtml;
-            }else if (selectId==="Image_exp7"){
-                var selectHtml = '<select id="' + selectId + '" onchange="loadContent(this.value)">';
-                selectHtml += '<option value="">Selecciona la clasificación</option>';
-                selectHtml += '<option value="https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp7/Exp7_first_steps.html">First steps</option>';
-                selectHtml += '<option value="https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp7/Exp7_final_steps.html">Final steps</option>';    
-                selectHtml += '</select>';
-                return selectHtml;
-            }else if (selectId==="Image_exp1"){
-                var selectHtml = '<select id="' + selectId + '" onchange="loadContent(this.value)">';
-                selectHtml += '<option value="">Selecciona una imagen de Thalento Diálogo y Lectura</option>';
-                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/Thalento/Avg_tim_Thalento.html">Tiempo medio por Nº letras</option>';
-                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/Thalento/Median_time_Thalento.html">Tiempo mediano por Nº letras</option>';
-                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/Thalento/STD_time_Thalento.html">Desviación típica del tiempo por Nº letras</option>';
-                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/Thalento/AudioSpeakThal.html">Tiempo de audio y Nº frases por persona</option>';
-                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/UMAP/UMAP_Thalento_dial_lect_grande.html">UMAP</option>';
-                selectHtml += '</select>';
-                return selectHtml;
-            }else if (selectId==="Image_exp2"){
-                var selectHtml = '<select id="' + selectId + '" onchange="loadContent(this.value)">';
-               selectHtml += '<option value="">Selecciona una imagen de Thalento Lectura</option>';
-                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/Thalento_lect/Avg_tim_Thalento_lect.html">Tiempo medio por Nº letras</option>';
-                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/Thalento_lect/Median_time_Thalento_lect.html">Tiempo mediano por Nº letras</option>';
-                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/Thalento_lect/STD_time_Thalento_lect.html">Desviación típica del tiempo por Nº letras</option>';
-                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/Thalento_lect/AudioSpeakThal_lect.html">Tiempo de audio y Nº frases por persona</option>';
-                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/UMAP/UMAP_Thalento_lect.html">UMAP</option>';
-                selectHtml += '</select>';
-                return selectHtml;
-            }else if (selectId==="Image_exp3"){
-                var selectHtml = '<select id="' + selectId + '" onchange="loadContent(this.value)">';
-               selectHtml += '<option value="">Selecciona una imagen de Thalento Lectura</option>';
-                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/Thalento_lect/Avg_tim_Thalento_lect.html">Tiempo medio por Nº letras</option>';
-                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/Thalento_lect/Median_time_Thalento_lect.html">Tiempo mediano por Nº letras</option>';
-                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/Thalento_lect/STD_time_Thalento_lect.html">Desviación típica del tiempo por Nº letras</option>';
-                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/Thalento_lect/AudioSpeakThal_lect.html">Tiempo de audio y Nº frases por persona</option>';
-                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/UMAP/UMAP_Thalento_lect.html">UMAP</option>';
-                selectHtml += '</select>';
-                return selectHtml;
-            }else if (selectId==="Image_exp4"){
-                var selectHtml = '<select id="' + selectId + '" onchange="loadContent(this.value)">';
-               selectHtml += '<option value="">Selecciona una imagen de Thalento Lectura</option>';
-                selectHtml += '<option value="https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Thalento_lect/Avg_tim_Thalento_lect.html">Tiempo medio por Nº letras</option>';
-                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/Thalento_lect/Median_time_Thalento_lect.html">Tiempo mediano por Nº letras</option>';
-                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/Thalento_lect/STD_time_Thalento_lect.html">Desviación típica del tiempo por Nº letras</option>';
-                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/Thalento_lect/AudioSpeakThal_lect.html">Tiempo de audio y Nº frases por persona</option>';
-                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/UMAP/UMAP_Thalento_lect.html">UMAP</option>';
-                selectHtml += '</select>';
-                return selectHtml;
+        // Mostrar contenido según el experimento seleccionado
+        function showCategory(category) {
+            switch (category) {
+                case "Experimento5":
+                    // Mostrar automáticamente las imágenes de "First steps" y "Final steps" para Experimento 5
+                    loadContent("https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp5/Exp5_first_steps.html");
+                    setTimeout(function() {
+                        loadContent("https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp5/Exp5_final_steps.html");
+                    }, 3000); // Cambia el tiempo de espera si es necesario
+                    break;
+                default:
+                    // Otras categorías requieren selección de imagen
+                    if (!secondSelectCreated) {
+                        var selectHtml = createSelect(category);
+                        updateSecondSelect(selectHtml);
+                        secondSelectCreated = true;
+                    } else {
+                        var selectHtml = createSelect(category);
+                        updateSecondSelect(selectHtml);
+                    }
+                    break;
             }
         }
+
+        // Crear el segundo select para cada categoría (menos Experimento 5)
+        function createSelect(category) {
+            var selectHtml = '<select id="Image_' + category + '" onchange="loadContent(this.value)">';
+            selectHtml += '<option value="">Selecciona una imagen</option>';
+            selectHtml += '<option value="https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/' + category + '/' + category + '_first_steps.html">First steps</option>';
+            selectHtml += '<option value="https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/' + category + '/' + category + '_final_steps.html">Final steps</option>';
+            selectHtml += '</select>';
+            return selectHtml;
+        }
+
+        function updateSecondSelect(optionsHtml) {
+            selectContainer.innerHTML = optionsHtml;
+        }
+
+        // Evento para actualizar según la selección de experimento
+        document.getElementById("experimentSelect").addEventListener("change", function() {
+            var experiment = this.value;
+            showCategory(experiment);
+        });
     </script>
+
 </body>
-</html>
+
