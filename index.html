@@ -127,13 +127,13 @@
         <tr>
             <td>
                 <select id="experimentSelect">
-                    <option value="Experimento1">Experimento 1</option>
-                    <option value="Experimento2">Experimento 2</option>
-                    <option value="Experimento3">Experimento 3</option>
-                    <option value="Experimento4">Experimento 4</option>
-                    <option value="Experimento5">Experimento 5</option>
-                    <option value="Experimento6">Experimento 6</option>
-                    <option value="Experimento7">Experimento 7</option>
+                    <option value="Exp1">Experimento 1</option>
+                    <option value="Exp2">Experimento 2</option>
+                    <option value="Exp3">Experimento 3</option>
+                    <option value="Exp4">Experimento 4</option>
+                    <option value="Exp5">Experimento 5</option>
+                    <option value="Exp6">Experimento 6</option>
+                    <option value="Exp7">Experimento 7</option>
                 </select>
             </td>
             <td id="selectContainer">
@@ -187,52 +187,30 @@
         }
 
         // Mostrar contenido según el experimento seleccionado
-        function showCategory(category) {
-            switch (category) {
-                case "Experimento5":
-                    // Mostrar automáticamente las imágenes de "First steps" y "Final steps" para Experimento 5
-                    loadContent("https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp5/Exp5_first_steps.html","https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp5/Exp5_final_steps.html");
-                    //setTimeout(function() {
-                    //    loadContent("https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp5/Exp5_final_steps.html");
-                    //}, 3000); // Cambia el tiempo de espera si es necesario
-                    break;
-                case "Experimento6":
-                    loadContent("https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp6/Exp6_first_steps.html","https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp6/Exp6_final_steps.html");
-                    break;
-                
-                default:
-                    // Otras categorías requieren selección de imagen
-                    if (!secondSelectCreated) {
-                        var selectHtml = createSelect(category);
-                        updateSecondSelect(selectHtml);
-                        secondSelectCreated = true;
-                    } else {
-                        var selectHtml = createSelect(category);
-                        updateSecondSelect(selectHtml);
-                    }
-                    break;
+        function showCategory(experiment) {
+            if (!experiment) {
+                // Si no se selecciona un experimento, vaciar contenido
+                loadContent(null, null);
+                return;
             }
+        
+            // Base URL donde están los archivos HTML para UMAP
+            const baseUrl = "https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/";
+        
+            // Generar las URLs para "First steps" y "Final steps" dinámicamente
+            const firstStepsUrl = `${baseUrl}${experiment}/${experiment}_first_steps.html`;
+            const finalStepsUrl = `${baseUrl}${experiment}/${experiment}_final_steps.html`;
+        
+            // Cargar las dos URLs
+            loadContent(firstStepsUrl, finalStepsUrl);
+        
+            // Cambiar las URLs de los audios
+            document.getElementById('audioOriginal').src = `audios/${experiment.toLowerCase()}_original.mp3`;
+            document.getElementById('audioFake').src = `audios/${experiment.toLowerCase()}_fake.mp3`;
         }
 
-        // Crear el segundo select para cada categoría (menos Experimento 5)
-        function createSelect(category) {
-            var selectHtml = '<select id="Image_' + category + '" onchange="loadContent(this.value)">';
-            selectHtml += '<option value="">Selecciona una imagen</option>';
-            selectHtml += '<option value="https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/' + category + '/' + category + '_first_steps.html">First steps</option>';
-            selectHtml += '<option value="https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/' + category + '/' + category + '_final_steps.html">Final steps</option>';
-            selectHtml += '</select>';
-            return selectHtml;
-        }
 
-        function updateSecondSelect(optionsHtml) {
-            selectContainer.innerHTML = optionsHtml;
-        }
-
-        // Evento para actualizar según la selección de experimento
-        document.getElementById("experimentSelect").addEventListener("change", function() {
-            var experiment = this.value;
-            showCategory(experiment);
-        });
+    
     </script>
 
 </body>
