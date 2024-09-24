@@ -116,6 +116,7 @@
         <img src="https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/Imagenes/Unizar.png" alt="Logo Universidad" class="logo">
         <h1>Assessing the Impact and Potential of TTS for Pathological Voice Data Augmentation on Pathology Detection Systems</h1>
         <img src="https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/Imagenes/Vivolab.png" alt="Logo Grupo Investigación" class="logo">
+        <br>
         <h2> Authors </h2> <p> Santiago Rubio Felipo, Dayana Ribas González, Eduardo Lleida Solano, Alfonso Ortega Giménez and Antonio Miguel Artiaga </p>
     </div>
 </header>
@@ -123,18 +124,18 @@
 <div class="container">
     <table>
         <tr>
-            <th colspan="2">Elige el experimento</th>
+            <th colspan="2">Choose Experiment</th>
         </tr>
         <tr>
             <td>
                 <select id="experimentSelect">
-                    <option value="Exp1">Experimento 1</option>
-                    <option value="Exp2">Experimento 2</option>
-                    <option value="Exp3">Experimento 3</option>
-                    <option value="Exp4">Experimento 4</option>
-                    <option value="Exp5">Experimento 5</option>
-                    <option value="Exp6">Experimento 6</option>
-                    <option value="Exp7">Experimento 7</option>
+                    <option value="Exp1">Experiment 1</option>
+                    <option value="Exp2">Experiment 2</option>
+                    <option value="Exp3">Experiment 3</option>
+                    <option value="Exp4">Experiment 4</option>
+                    <option value="Exp5">Experiment 5</option>
+                    <option value="Exp6">Experiment 6</option>
+                    <option value="Exp7">Experiment 7</option>
                 </select>
             </td>
         </tr>
@@ -197,13 +198,12 @@
             // Generar las URLs para "First steps" y "Final steps" dinámicamente
             const firstStepsUrl = `${baseUrl}${experiment}/${experiment}_first_steps.html`;
             const finalStepsUrl = `${baseUrl}${experiment}/${experiment}_final_steps.html`;
-            document.getElementById("output").innerHTML = firstStepsUrl;
             // Cargar las dos URLs
             loadContent(firstStepsUrl, finalStepsUrl);
         
             // Cambiar las URLs de los audios
-            document.getElementById('audioOriginal').src = `audios/${experiment.toLowerCase()}_original.mp3`;
-            document.getElementById('audioFake').src = `audios/${experiment.toLowerCase()}_fake.mp3`;
+            // document.getElementById('audioOriginal').src = `audios/${experiment.toLowerCase()}_original.mp3`;
+            // document.getElementById('audioFake').src = `audios/${experiment.toLowerCase()}_fake.mp3`;
         }
 
 
