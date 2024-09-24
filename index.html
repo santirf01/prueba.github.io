@@ -146,83 +146,176 @@
     
 <!-- Script para cambiar las imágenes y los audios según el experimento seleccionado -->
 <script>
-    document.getElementById('experimentSelect').addEventListener('change', function() {
-        var experiment = this.value;
-        document.getElementById('umapStart').src = 'umap_images/' + experiment + '_start.png';
-        document.getElementById('umapEnd').src = 'umap_images/' + experiment + '_end.png';
-        document.getElementById('audioOriginal').src = 'audios/' + experiment + '_original.mp3';
-        document.getElementById('audioFake').src = 'audios/' + experiment + '_fake.mp3';
-    });
-</script>
-<!-- Librería de Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    // Gráfico de Barras
-    var ctxBar = document.getElementById('barChart').getContext('2d');
-    var barChart = new Chart(ctxBar, {
-        type: 'bar',
-        data: {
-            labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
-            datasets: [{
-                label: 'Ventas',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: 'rgba(52, 152, 219, 0.6)',
-                borderColor: 'rgba(52, 152, 219, 1)',
-                borderWidth: 1
-            }]
+        var selectContainer = document.getElementById("selectContainer");
+       var secondSelectCreated = false; // Variable para controlar si se ha creado el segundo select
+        // Función para cargar el contenido según la selección
+        function loadContent(url) {
+            var contenidoDiv = document.getElementById("contenido");
+            if (url) {
+                contenidoDiv.innerHTML = '<iframe src="' + url + '" width="840" height="640"></iframe>';
+            } else {
+                contenidoDiv.innerHTML = ""; // Limpiar el contenido si no se selecciona nada
+            }
         }
-    });
+ function updateSecondSelect(optionsHtml) {
+        selectContainer.innerHTML = optionsHtml;
+    }        
+function showCategory(category) {
+    var contenidoDiv = document.getElementById("contenido");
+    
+    // Limpia el contenido del primer select cada vez que se elige una nueva categoría
+    contenidoDiv.innerHTML = "";
 
-    // Gráfico de Líneas
-    var ctxLine = document.getElementById('lineChart').getContext('2d');
-    var lineChart = new Chart(ctxLine, {
-        type: 'line',
-        data: {
-            labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
-            datasets: [{
-                label: 'Visitas',
-                data: [30, 50, 40, 60, 80, 70],
-                backgroundColor: 'rgba(46, 204, 113, 0.6)',
-                borderColor: 'rgba(46, 204, 113, 1)',
-                borderWidth: 2
-            }]
+    switch (category) {
+        case "Experimento5":
+            if (!secondSelectCreated) {
+                var selectHtml = createSelect("Image_exp5");
+                 updateSecondSelect(selectHtml);
+                secondSelectCreated = true;
+            }else {
+                var selectHtml = createSelect("Image_exp5"); 
+                updateSecondSelect(selectHtml);
+            }
+            document.getElementById("Image_exp5").selectedIndex = 0;
+            break;
+        case "Experimento6":
+            if (!secondSelectCreated) {
+                var selectHtml = createSelect("Image_exp6");
+                 updateSecondSelect(selectHtml);
+                secondSelectCreated = true;
+            }else {
+               var selectHtml = createSelect("Image_exp6");
+                updateSecondSelect(selectHtml);
+            }
+            document.getElementById("Image_exp6").selectedIndex = 0;
+            break;
+        case "Experimento7":
+            if (!secondSelectCreated) {
+                var selectHtml = createSelect("Image_exp7");
+                 updateSecondSelect(selectHtml);
+                secondSelectCreated = true;
+            }else {
+            var selectHtml = createSelect("Image_exp7");
+                 updateSecondSelect(selectHtml);
+            }
+            document.getElementById("Image_exp7").selectedIndex = 0;
+            break;
+        case "Experimento1":
+            if (!secondSelectCreated) {
+                var selectHtml = createSelect("Image_exp1");
+                 updateSecondSelect(selectHtml);
+                secondSelectCreated = true;
+            }else {
+                 var selectHtml = createSelect("Image_exp1");
+                 updateSecondSelect(selectHtml);
+            }
+            document.getElementById("Image_exp1").selectedIndex = 0;
+            break;
+        case "Experimento2":
+            if (!secondSelectCreated) {
+                var selectHtml = createSelect("Image_exp2");
+                 updateSecondSelect(selectHtml);
+                secondSelectCreated = true;
+            }else {
+                var selectHtml = createSelect("Image_exp2");
+                 updateSecondSelect(selectHtml);
+            }
+            document.getElementById("Image_exp2").selectedIndex = 0;
+            break;
+        case "Experimento3":
+            if (!secondSelectCreated) {
+                var selectHtml = createSelect("Image_exp3");
+                 updateSecondSelect(selectHtml);
+                secondSelectCreated = true;
+            }else {
+                var selectHtml = createSelect("Image_exp3");
+                 updateSecondSelect(selectHtml);
+            }
+            document.getElementById("Image_exp3").selectedIndex = 0;
+            break;
+        case "Experimento4":
+            if (!secondSelectCreated) {
+                var selectHtml = createSelect("Image_exp4");
+                 updateSecondSelect(selectHtml);
+                secondSelectCreated = true;
+            }else {
+                var selectHtml = createSelect("Image_exp4");
+                 updateSecondSelect(selectHtml);
+            }
+            document.getElementById("Image_exp4").selectedIndex = 0;
+            break;
+        default:
+            // Si no se selecciona ninguna categoría, limpiar el contenido del segundo select
+            selectContainer.innerHTML = "";
+            secondSelectCreated = false;
+            break;
+    }
+}
+
+        function createSelect(selectId) {
+            if (selectId==="Image_exp5"){
+                var selectHtml = '<select id="' + selectId + '" onchange="loadContent(this.value)">';
+                selectHtml += '<option value="">Selecciona una imagen de Librivox</option>';
+                selectHtml += '<option value="https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp5/Exp5_first_steps.html">First steps</option>';
+                selectHtml += '<option value="https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp5/Exp5_final_steps.html">Final steps</option>';
+                selectHtml += '</select>';
+                return selectHtml;
+            }else if (selectId==="Image_exp6"){
+                var selectHtml = '<select id="' + selectId + '" onchange="loadContent(this.value)">';
+                selectHtml += '<option value="">Selecciona la clasificación</option>';
+                selectHtml += '<option value="https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp6/Exp6_first_steps.html">First steps</option>';
+                selectHtml += '<option value="https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp6/Exp6_final_steps.html">Final steps</option>';                
+                selectHtml += '</select>';
+                return selectHtml;
+            }else if (selectId==="Image_exp7"){
+                var selectHtml = '<select id="' + selectId + '" onchange="loadContent(this.value)">';
+                selectHtml += '<option value="">Selecciona la clasificación</option>';
+                selectHtml += '<option value="https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp7/Exp7_first_steps.html">First steps</option>';
+                selectHtml += '<option value="https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp7/Exp7_final_steps.html">Final steps</option>';    
+                selectHtml += '</select>';
+                return selectHtml;
+            }else if (selectId==="Image_exp1"){
+                var selectHtml = '<select id="' + selectId + '" onchange="loadContent(this.value)">';
+                selectHtml += '<option value="">Selecciona una imagen de Thalento Diálogo y Lectura</option>';
+                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/Thalento/Avg_tim_Thalento.html">Tiempo medio por Nº letras</option>';
+                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/Thalento/Median_time_Thalento.html">Tiempo mediano por Nº letras</option>';
+                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/Thalento/STD_time_Thalento.html">Desviación típica del tiempo por Nº letras</option>';
+                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/Thalento/AudioSpeakThal.html">Tiempo de audio y Nº frases por persona</option>';
+                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/UMAP/UMAP_Thalento_dial_lect_grande.html">UMAP</option>';
+                selectHtml += '</select>';
+                return selectHtml;
+            }else if (selectId==="Image_exp2"){
+                var selectHtml = '<select id="' + selectId + '" onchange="loadContent(this.value)">';
+               selectHtml += '<option value="">Selecciona una imagen de Thalento Lectura</option>';
+                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/Thalento_lect/Avg_tim_Thalento_lect.html">Tiempo medio por Nº letras</option>';
+                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/Thalento_lect/Median_time_Thalento_lect.html">Tiempo mediano por Nº letras</option>';
+                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/Thalento_lect/STD_time_Thalento_lect.html">Desviación típica del tiempo por Nº letras</option>';
+                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/Thalento_lect/AudioSpeakThal_lect.html">Tiempo de audio y Nº frases por persona</option>';
+                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/UMAP/UMAP_Thalento_lect.html">UMAP</option>';
+                selectHtml += '</select>';
+                return selectHtml;
+            }else if (selectId==="Image_exp3"){
+                var selectHtml = '<select id="' + selectId + '" onchange="loadContent(this.value)">';
+               selectHtml += '<option value="">Selecciona una imagen de Thalento Lectura</option>';
+                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/Thalento_lect/Avg_tim_Thalento_lect.html">Tiempo medio por Nº letras</option>';
+                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/Thalento_lect/Median_time_Thalento_lect.html">Tiempo mediano por Nº letras</option>';
+                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/Thalento_lect/STD_time_Thalento_lect.html">Desviación típica del tiempo por Nº letras</option>';
+                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/Thalento_lect/AudioSpeakThal_lect.html">Tiempo de audio y Nº frases por persona</option>';
+                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/UMAP/UMAP_Thalento_lect.html">UMAP</option>';
+                selectHtml += '</select>';
+                return selectHtml;
+            }else if (selectId==="Image_exp4"){
+                var selectHtml = '<select id="' + selectId + '" onchange="loadContent(this.value)">';
+               selectHtml += '<option value="">Selecciona una imagen de Thalento Lectura</option>';
+                selectHtml += '<option value="https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Thalento_lect/Avg_tim_Thalento_lect.html">Tiempo medio por Nº letras</option>';
+                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/Thalento_lect/Median_time_Thalento_lect.html">Tiempo mediano por Nº letras</option>';
+                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/Thalento_lect/STD_time_Thalento_lect.html">Desviación típica del tiempo por Nº letras</option>';
+                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/Thalento_lect/AudioSpeakThal_lect.html">Tiempo de audio y Nº frases por persona</option>';
+                selectHtml += '<option value="https://santirf01.github.io/TFG_Image_page.io/Imagenes/UMAP/UMAP_Thalento_lect.html">UMAP</option>';
+                selectHtml += '</select>';
+                return selectHtml;
+            }
         }
-    });
-
-    // Gráfico Circular
-    var ctxPie = document.getElementById('pieChart').getContext('2d');
-    var pieChart = new Chart(ctxPie, {
-        type: 'pie',
-        data: {
-            labels: ['Red', 'Blue', 'Yellow'],
-            datasets: [{
-                label: 'Distribución',
-                data: [300, 50, 100],
-                backgroundColor: [
-                    'rgba(231, 76, 60, 0.6)',
-                    'rgba(52, 152, 219, 0.6)',
-                    'rgba(241, 196, 15, 0.6)'
-                ]
-            }]
-        }
-    });
-
-    // Gráfico de Radar
-    var ctxRadar = document.getElementById('radarChart').getContext('2d');
-    var radarChart = new Chart(ctxRadar, {
-        type: 'radar',
-        data: {
-            labels: ['Correr', 'Nadar', 'Ciclismo', 'Caminar'],
-            datasets: [{
-                label: 'Habilidades',
-                data: [20, 10, 4, 2],
-                backgroundColor: 'rgba(155, 89, 182, 0.4)',
-                borderColor: 'rgba(155, 89, 182, 1)',
-                borderWidth: 2
-            }]
-        }
-    });
-</script>
-
+    </script>
 </body>
 </html>
