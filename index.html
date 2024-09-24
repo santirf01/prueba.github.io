@@ -178,8 +178,8 @@
             if (url1 && url2) {
                 contenidoDiv.innerHTML = `
                     <div class="image-container">
-                        <iframe src="${url1}" width="420" height="640"></iframe>
-                        <iframe src="${url2}" width="420" height="640"></iframe>
+                        <iframe src="${url1}" width="840" height="640"></iframe>
+                        <iframe src="${url2}" width="840" height="640"></iframe>
                     </div>`;
             } else {
                 contenidoDiv.innerHTML = ""; 
@@ -192,10 +192,14 @@
                 case "Experimento5":
                     // Mostrar automáticamente las imágenes de "First steps" y "Final steps" para Experimento 5
                     loadContent("https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp5/Exp5_first_steps.html","https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp5/Exp5_final_steps.html");
-                    setTimeout(function() {
-                        loadContent("https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp5/Exp5_final_steps.html");
-                    }, 3000); // Cambia el tiempo de espera si es necesario
+                    //setTimeout(function() {
+                    //    loadContent("https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp5/Exp5_final_steps.html");
+                    //}, 3000); // Cambia el tiempo de espera si es necesario
                     break;
+                case "Experimento6":
+                    loadContent("https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp6/Exp6_first_steps.html","https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp6/Exp6_final_steps.html");
+                    break;
+                
                 default:
                     // Otras categorías requieren selección de imagen
                     if (!secondSelectCreated) {
