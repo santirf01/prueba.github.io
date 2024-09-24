@@ -51,9 +51,13 @@
             margin-bottom: 10px;
             color: #34495e;
         }
-        .card img {
+        .card img, .card audio {
             max-width: 100%;
             height: auto;
+            margin-top: 10px;
+        }
+       audio {
+            width: 100%;
             margin-top: 10px;
         }
         footer {
@@ -73,6 +77,16 @@
             border-radius: 5px;
             border: 1px solid #ccc;
         }
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -82,36 +96,62 @@
 </header>
 
 <div class="container">
-    <div class="selector-container">
-        <label for="experimentSelect">Selecciona un experimento:</label>
-        <select id="experimentSelect">
-            <option value="experimento1">Experimento 1</option>
-            <option value="experimento2">Experimento 2</option>
-            <option value="experimento3">Experimento 3</option>
-        </select>
-    </div>
-    
-    <div class="card">
-        <h2>UMAP - Primeros Steps</h2>
-        <img id="umapStart" src="https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp5/Exp5_first_steps.html" alt="UMAP Primeros Steps">
-    </div>
-    
-    <div class="card">
-        <h2>UMAP - Últimos Steps</h2>
-        <img id="umapEnd" src="https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp5/Exp5_first_steps.html" alt="UMAP Últimos Steps">
+    <table>
+        <tr>
+            <th colspan="2">Elige el experimento</th>
+        </tr>
+        <tr>
+            <td>
+                <select id="experimentSelect">
+                    <option value="experimento1">Experimento 1</option>
+                    <option value="experimento2">Experimento 2</option>
+                    <option value="experimento3">Experimento 3</option>
+                </select>
+            </td>
+            <td id="selectContainer">
+                <!-- Aquí se cargará el segundo select -->
+            </td>
+        </tr>
+    </table>
+
+    <!--<div class="grid">
+        <div class="card">
+            <h2>UMAP - Primeros Steps</h2>
+            <img id="umapStart" src="umap_images/experimento1_start.png" alt="UMAP Primeros Steps">
+        </div>
+        <div class="card">
+            <h2>UMAP - Últimos Steps</h2>
+            <img id="umapEnd" src="umap_images/experimento1_end.png" alt="UMAP Últimos Steps">
+        </div>
+    </div>-->
+        <div class="card">
+        <h2>Audio Original vs. Fake</h2>
+        <h3>Audio Original</h3>
+        <audio id="audioOriginal" controls>
+            <source src="audios/experimento1_original.mp3" type="audio/mpeg">
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+        
+        <h3>Audio Fake (TTS)</h3>
+        <audio id="audioFake" controls>
+            <source src="audios/experimento1_fake.mp3" type="audio/mpeg">
+            Tu navegador no soporta el elemento de audio.
+        </audio>
     </div>
 </div>
-
-
+    
 <footer>
     <p>&copy; 2024 Dashboard Elegante. Todos los derechos reservados.</p>
 </footer>
     
+<!-- Script para cambiar las imágenes y los audios según el experimento seleccionado -->
 <script>
     document.getElementById('experimentSelect').addEventListener('change', function() {
         var experiment = this.value;
         document.getElementById('umapStart').src = 'umap_images/' + experiment + '_start.png';
         document.getElementById('umapEnd').src = 'umap_images/' + experiment + '_end.png';
+        document.getElementById('audioOriginal').src = 'audios/' + experiment + '_original.mp3';
+        document.getElementById('audioFake').src = 'audios/' + experiment + '_fake.mp3';
     });
 </script>
 <!-- Librería de Chart.js -->
