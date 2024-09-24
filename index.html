@@ -1,1 +1,167 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard Elegante</title>
+    <!-- Fuentes de Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- CSS para estilo -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 48%;
+            margin-bottom: 20px;
+        }
+        .card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #34495e;
+        }
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Dashboard Elegante</h1>
+</header>
+
+<div class="container">
+    <div class="card">
+        <h2>Gráfico de Barras</h2>
+        <canvas id="barChart"></canvas>
+    </div>
+    <div class="card">
+        <h2>Gráfico de Líneas</h2>
+        <canvas id="lineChart"></canvas>
+    </div>
+    <div class="card">
+        <h2>Gráfico Circular</h2>
+        <canvas id="pieChart"></canvas>
+    </div>
+    <div class="card">
+        <h2>Gráfico de Radar</h2>
+        <canvas id="radarChart"></canvas>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2024 Dashboard Elegante. Todos los derechos reservados.</p>
+</footer>
+
+<!-- Librería de Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Gráfico de Barras
+    var ctxBar = document.getElementById('barChart').getContext('2d');
+    var barChart = new Chart(ctxBar, {
+        type: 'bar',
+        data: {
+            labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+            datasets: [{
+                label: 'Ventas',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: 'rgba(52, 152, 219, 0.6)',
+                borderColor: 'rgba(52, 152, 219, 1)',
+                borderWidth: 1
+            }]
+        }
+    });
+
+    // Gráfico de Líneas
+    var ctxLine = document.getElementById('lineChart').getContext('2d');
+    var lineChart = new Chart(ctxLine, {
+        type: 'line',
+        data: {
+            labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+            datasets: [{
+                label: 'Visitas',
+                data: [30, 50, 40, 60, 80, 70],
+                backgroundColor: 'rgba(46, 204, 113, 0.6)',
+                borderColor: 'rgba(46, 204, 113, 1)',
+                borderWidth: 2
+            }]
+        }
+    });
+
+    // Gráfico Circular
+    var ctxPie = document.getElementById('pieChart').getContext('2d');
+    var pieChart = new Chart(ctxPie, {
+        type: 'pie',
+        data: {
+            labels: ['Red', 'Blue', 'Yellow'],
+            datasets: [{
+                label: 'Distribución',
+                data: [300, 50, 100],
+                backgroundColor: [
+                    'rgba(231, 76, 60, 0.6)',
+                    'rgba(52, 152, 219, 0.6)',
+                    'rgba(241, 196, 15, 0.6)'
+                ]
+            }]
+        }
+    });
+
+    // Gráfico de Radar
+    var ctxRadar = document.getElementById('radarChart').getContext('2d');
+    var radarChart = new Chart(ctxRadar, {
+        type: 'radar',
+        data: {
+            labels: ['Correr', 'Nadar', 'Ciclismo', 'Caminar'],
+            datasets: [{
+                label: 'Habilidades',
+                data: [20, 10, 4, 2],
+                backgroundColor: 'rgba(155, 89, 182, 0.4)',
+                borderColor: 'rgba(155, 89, 182, 1)',
+                borderWidth: 2
+            }]
+        }
+    });
+</script>
+
+</body>
+</html>
