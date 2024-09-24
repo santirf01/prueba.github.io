@@ -37,6 +37,13 @@
             flex-direction: column;
             justify-content: space-between;
         }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+            
         .card {
             background-color: white;
             border-radius: 8px;
@@ -95,12 +102,21 @@
         iframe {
             border: none;
         }
+        .logo {
+            width: 100px; /* Ajusta el tamaño según tus necesidades */
+            height: auto;
+            margin: 0 20px;
+        }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Assessing the Impact and Potential of TTS for Pathological Voice Data Augmentation on Pathology Detection Systems</h1>
+    <div class="logo-container">
+        <img src="ruta_del_logo_universidad.png" alt="Logo Universidad" class="logo">
+        <h1>Assessing the Impact and Potential of TTS for Pathological Voice Data Augmentation on Pathology Detection Systems</h1>
+        <img src="ruta_del_logo_grupo_investigacion.png" alt="Logo Grupo Investigación" class="logo">
+    </div>
 </header>
 
 <div class="container">
@@ -124,6 +140,11 @@
                 <!-- Aquí se cargará el segundo select -->
             </td>
         </tr>
+        <tr>
+        <td colspan="2">
+            <div id="contenido"></div>
+        </td>
+    </tr>
     </table>
 
     <div class="card">
