@@ -142,6 +142,7 @@
         <tr>
             <td>
                 <select id="showCategory">
+                    <option value="Choose">Choose Experiment</option>
                     <option value="Exp1">Experiment 1</option>
                     <option value="Exp2">Experiment 2</option>
                     <option value="Exp3">Experiment 3</option>
@@ -200,7 +201,7 @@
 
         // Mostrar contenido según el experimento seleccionado
         function showCategory(experiment) {
-            if (!experiment) {
+            if (experiment=="Choose") {
                 // Si no se selecciona un experimento, vaciar contenido
                 loadContent(null, null);
                 return;
