@@ -207,6 +207,7 @@
         function loadContent(url1, url2) {
             var contenidoDiv = document.getElementById("contenido");
             if (url1 && url2) {
+                var title = stepType === "first" ? "UMAP First Steps" : "UMAP Final Steps";
                 contenidoDiv.innerHTML = `
                     <div class="image-container">
                         <iframe src="${url1}" width="840" height="640"></iframe>
