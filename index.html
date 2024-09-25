@@ -371,7 +371,9 @@
 
         // Set default speaker on load
         window.onload = function() {
+            loadCSV();
             updateAudioSources(document.getElementById("speaker-select").value);
+            updateSpeaker(document.getElementById("speaker-select").value);
         };
     // CSV
         let speakersData = {};
@@ -412,17 +414,9 @@
                     <strong>Diagnosis:</strong> ${speakerInfo.Diagnóstico}<br>
                     <strong>Severity (GRBAS-1):</strong> ${speakerInfo['GRBAS-1']}<br>
                     <strong>Severity (GRBAS-2):</strong> ${speakerInfo['GRBAS-2']}`;
-        
-                // Actualizar fuentes de audio
-                updateAudioSources(speakerInfo.Código);
             }
         }
         
-        // Set default speaker on load
-        window.onload = function() {
-            loadCSV();
-        };
-
     
     </script>
 
