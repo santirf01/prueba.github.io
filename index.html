@@ -123,6 +123,31 @@
             margin: 5px 0; /* Espaciado alrededor del párrafo */
             font-size: 1.2rem; /* Tamaño del texto */
         }
+        .audio-player {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .player-box {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            width: 45%;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .player-box audio {
+            width: 100%;
+        }
+
+        .label {
+            font-size: 18px;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -149,8 +174,25 @@
     <p>11/11/2024-13/11/2024</p>
     
 </subheader>
-    
-    
+<div class="container">
+        <h2>TTS Data Augmentation</h2>
+        <div class="audio-player">
+            <div class="player-box">
+                <div class="label">Original Audio</div>
+                <audio controls>
+                    <source src="https://santirf01.github.io/TFG_TTS_page.io/Thalento/Audios_Originales/TVD-D-0001_D8_LECTURA.wav" type="audio/wav">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+            <div class="player-box">
+                <div class="label">Fake Audio</div>
+                <audio controls>
+                    <source src="https://santirf01.github.io/TFG_TTS_page.io/Thalento/Audios/TVD-D-0001/TVD-D-0001_0001.wav" type="audio/wav">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        </div>
+    </div>
 
 <div class="container">
     <table>
