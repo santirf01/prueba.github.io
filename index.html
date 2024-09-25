@@ -373,46 +373,57 @@
             updateAudioSources(document.getElementById("speaker-select").value);
         };
     // CSV
-    let speakersData = {};
-
-    // Función para cargar y procesar el CSV usando PapaParse
-    function loadCSV() {
-        Papa.parse('https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/speaker_info.csv', {
-            download: true,
-            header: true,
-            complete: function(results) {
-                speakersData = results.data;
-                populateSpeakerSelect();
-            }
-        });
-    }
-    // Función para llenar el selector de speakers
-    function populateSpeakerSelect() {
-        const select = document.getElementById('speakerSelect');
-        speakersData.forEach(speaker => {
-            const option = document.createElement('option');
-            option.value = speaker.Código;
-            option.text = speaker.Código;
-            select.appendChild(option);
-        });
-    }
-    function updateSpeaker() {
-        const select = document.getElementById('speakerSelect');
-        const selectedSpeaker = select.value;
-        const speakerInfo = speakersData.find(speaker => speaker.Código === selectedSpeaker);
-
-        if (speakerInfo) {
-            // Actualizar información del speaker
-            document.getElementById('speakerInfo').innerHTML = `
-                <strong>Name:</strong> ${speakerInfo.Código}<br>
-                <strong>Age:</strong> ${speakerInfo.Edad}<br>
-                <strong>Gender:</strong> ${speakerInfo.Sexo}<br>
-                <strong>Diagnosis:</strong> ${speakerInfo.Diagnóstico}<br>
-                <strong>Severity (GRBAS-1):</strong> ${speakerInfo['GRBAS-1']}<br>
-                <strong>Severity (GRBAS-2):</strong> ${speakerInfo['GRBAS-2']}`;
+        let speakersData = {};
+        
+        // Función para cargar y procesar el CSV usando PapaParse
+        function loadCSV() {
+            Papa.parse('https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/speaker_info.csv', {
+                download: true,
+                header: true,
+                complete: function(results) {
+                    speakersData = results.data;
+                    populateSpeakerSelect();
+                }
+            });
         }
-    }
-    window.onload = loadCSV;
+        
+        // Función para llenar el selector de speakers
+        function populateSpeakerSelect() {
+            const select = document.getElementById('speakerSelect');
+            speakersData.forEach(speaker => {
+                const option = document.createElement('option');
+                option.value = speaker.Código;
+                option.text = speaker.Código;
+                select.appendChild(option);
+            });
+        }
+        
+        // Función para actualizar la información y los audios cuando se selecciona un speaker
+        function updateSpeaker() {
+            const select = document.getElementById('speakerSelect');
+            const selectedSpeaker = select.value;
+            const speakerInfo = speakersData.find(speaker => speaker.Código === selectedSpeaker);
+        
+            if (speakerInfo) {
+                // Actualizar información del speaker
+                document.getElementById('speakerInfo').innerHTML = `
+                    <strong>Name:</strong> ${speakerInfo.Código}<br>
+                    <strong>Age:</strong> ${speakerInfo.Edad}<br>
+                    <strong>Gender:</strong> ${speakerInfo.Sexo}<br>
+                    <strong>Diagnosis:</strong> ${speakerInfo.Diagnóstico}<br>
+                    <strong>Severity (GRBAS-1):</strong> ${speakerInfo['GRBAS-1']}<br>
+                    <strong>Severity (GRBAS-2):</strong> ${speakerInfo['GRBAS-2']}`;
+        
+                // Actualizar fuentes de audio
+                updateAudioSources(speakerInfo.Código);
+            }
+        }
+        
+        // Set default speaker on load
+        window.onload = function() {
+            loadCSV();
+        };
+
     
     </script>
 
