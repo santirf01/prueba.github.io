@@ -203,7 +203,7 @@
     <h2>TTS Data Augmentation</h2>
     <div class="container">
         <label_audio for="speaker-select">Select Speaker:</label_audio>
-        <select id="speaker-select" onchange="updateSpeaker()">
+        <select id="speaker-select">
             <option value="TVD-D-0001">TVD-D-0001</option>
             <option value="TVD-D-0002">TVD-D-0002</option>
             <option value="TVD-D-0003">TVD-D-0003</option>
@@ -366,6 +366,7 @@
         speakerSelect.addEventListener("change", (event) => {
             const selectedSpeaker = event.target.value;
             updateAudioSources(selectedSpeaker);
+            updateSpeaker(selectedSpeaker);
         });
 
         // Set default speaker on load
@@ -399,9 +400,7 @@
         }
         
         // Función para actualizar la información y los audios cuando se selecciona un speaker
-        function updateSpeaker() {
-            const select = document.getElementById('speakerSelect');
-            const selectedSpeaker = select.value;
+        function updateSpeaker(selectedSpeaker) {
             const speakerInfo = speakersData.find(speaker => speaker.Código === selectedSpeaker);
         
             if (speakerInfo) {
