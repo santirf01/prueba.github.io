@@ -156,10 +156,15 @@
         .fake-audio-item {
             margin-bottom: 15px;
         }
-         select {
+         select_audio {
             font-size: 16px;
             padding: 5px;
             margin-bottom: 20px;
+        }
+        .label_audio {
+            font-size: 14px;
+            color: #4a90e2;
+            margin-bottom: 5px;
         }
     </style>
 </head>
@@ -190,8 +195,8 @@
 <body>
     <h2>TTS Data Augmentation</h2>
     <div class="container">
-        <label for="speaker-select">Select Speaker:</label>
-        <select id="speaker-select">
+        <label_audio for="speaker-select">Select Speaker:</label_audio>
+        <select id="speaker-select" onchange="changeSpeaker()">
             <option value="TVD-D-0001">TVD-D-0001</option>
             <option value="TVD-D-0002">TVD-D-0002</option>
             <option value="TVD-D-0003">TVD-D-0003</option>
