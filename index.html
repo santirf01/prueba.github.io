@@ -293,22 +293,6 @@
             </td>
         </tr>
     </table>
-<!--
-    <div class="card">
-        <h2>Audio Original vs. Fake</h2>
-        <h3>Audio Original</h3>
-        <audio id="audioOriginal" controls>
-            <source src="audios/experimento1_original.mp3" type="audio/mpeg">
-            Tu navegador no soporta el elemento de audio.
-        </audio>
-        
-        <h3>Audio Fake (TTS)</h3>
-        <audio id="audioFake" controls>
-            <source src="audios/experimento1_fake.mp3" type="audio/mpeg">
-            Tu navegador no soporta el elemento de audio.
-        </audio>
-    </div> 
-    -->
 </div>
     
 <footer>
@@ -316,7 +300,7 @@
 </footer>
     
 <!-- Script para cambiar las imágenes y los audios según el experimento seleccionado -->
-<script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js">
 
     
         var secondSelectCreated = false;
@@ -354,9 +338,6 @@
             console.log(firstStepsUrl, finalStepsUrl);
             loadContent(firstStepsUrl, finalStepsUrl);
         
-            // Cambiar las URLs de los audios
-            // document.getElementById('audioOriginal').src = `audios/${experiment.toLowerCase()}_original.mp3`;
-            // document.getElementById('audioFake').src = `audios/${experiment.toLowerCase()}_fake.mp3`;
         }
 
     
