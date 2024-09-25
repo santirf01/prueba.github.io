@@ -274,7 +274,7 @@
         </tr>
         <tr>
             <td>
-                <select id="showCategory", onchange="showCategory(this.value)">
+                <select id="showCategory" onchange="showCategory(this.value)">
                     <option value="Choose">Choose Experiment</option>
                     <option value="Exp1">Experiment 1</option>
                     <option value="Exp2">Experiment 2</option>
@@ -391,7 +391,7 @@
         
         // Función para llenar el selector de speakers
         function populateSpeakerSelect() {
-            const select = document.getElementById('speakerSelect');
+            const select = document.getElementById('speaker-select');
             speakersData.forEach(speaker => {
                 const option = document.createElement('option');
                 option.value = speaker.Código;
