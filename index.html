@@ -200,70 +200,69 @@
 </subheader>
     <br> <br>
     <h2>TTS Data Augmentation</h2>
-    <div class="container">
-        <label_audio for="speaker-select">Select Speaker:</label_audio>
-        <select id="speaker-select">
-            <option value="TVD-D-0001">TVD-D-0001</option>
-            <option value="TVD-D-0002">TVD-D-0002</option>
-            <option value="TVD-D-0003">TVD-D-0003</option>
-            <option value="TVD-D-0005">TVD-D-0005</option>
-            <option value="TVD-D-0006">TVD-D-0006</option>
-            <option value="TVD-D-0007">TVD-D-0007</option>
-            <option value="TVD-D-0008">TVD-D-0008</option>
-            <option value="TVD-D-0009">TVD-D-0009</option>
-            <option value="TVD-D-0010">TVD-D-0010</option>
-            <option value="TVD-D-0011">TVD-D-0011</option>
-            <option value="TVD-D-0012">TVD-D-0012</option>
-            <option value="TVD-D-0013">TVD-D-0013</option>
-            <!-- Add more speakers here -->
-        </select>
-        
-        <div class="audio-player">
-            <!-- Original Audio -->
-            <div class="player-box">
-                <div class="label">Original Audio</div>
-                <audio id="original-audio" controls>
-                    <source id="original-source" src="" type="audio/wav">
-                    Your browser does not support the audio element.
-                </audio>
-            </div>
-
-             <!-- Fake Audios -->
-            <div class="player-box">
-                <div class="label">Data Augmentation TTS</div>
-
-                <!-- Fake Audio List -->
-                <div class="fake-audios">
-                    <div class="fake-audio-item">
-                        <div class="label">TTS Audio 1</div>
-                        <audio id="fake-audio-1" controls>
-                            <source id="fake-source-1" src="" type="audio/wav">
-                            Your browser does not support the audio element.
-                        </audio>
-                    </div>
-
-                    <div class="fake-audio-item">
-                        <div class="label">TTS Audio 2</div>
-                        <audio id="fake-audio-2" controls>
-                            <source id="fake-source-2" src="" type="audio/wav">
-                            Your browser does not support the audio element.
-                        </audio>
-                    </div>
-
-                    <div class="fake-audio-item">
-                        <div class="label">TTS Audio 3</div>
-                        <audio id="fake-audio-3" controls>
-                            <source id="fake-source-3" src="" type="audio/wav">
-                            Your browser does not support the audio element.
-                        </audio>
-                    </div>
-
-                    <!-- Añade más audios aquí -->
-                </div>
-            </div>
-            <div id="speakerInfo" class="speaker-info">
+<div class="container">
+    <label_audio for="speaker-select">Select Speaker:</label_audio>
+    <select id="speaker-select">
+        <option value="TVD-D-0001">TVD-D-0001</option>
+        <option value="TVD-D-0002">TVD-D-0002</option>
+        <option value="TVD-D-0003">TVD-D-0003</option>
+        <option value="TVD-D-0005">TVD-D-0005</option>
+        <option value="TVD-D-0006">TVD-D-0006</option>
+        <option value="TVD-D-0007">TVD-D-0007</option>
+        <option value="TVD-D-0008">TVD-D-0008</option>
+        <option value="TVD-D-0009">TVD-D-0009</option>
+        <option value="TVD-D-0010">TVD-D-0010</option>
+        <option value="TVD-D-0011">TVD-D-0011</option>
+        <option value="TVD-D-0012">TVD-D-0012</option>
+        <option value="TVD-D-0013">TVD-D-0013</option>
+        <!-- Add more speakers here -->
+    </select>
+    
+    <div class="audio-player">
+        <!-- Original Audio -->
+        <div class="player-box">
+            <div class="label">Original Audio</div>
+            <audio id="original-audio" controls>
+                <source id="original-source" src="" type="audio/wav">
+                Your browser does not support the audio element.
+            </audio>
         </div>
+
+        <!-- Fake Audios -->
+        <div class="player-box">
+            <div class="label">Data Augmentation TTS</div>
+
+            <!-- Fake Audio List -->
+            <div class="fake-audios">
+                <div class="fake-audio-item">
+                    <div class="label">TTS Audio 1</div>
+                    <audio id="fake-audio-1" controls>
+                        <source id="fake-source-1" src="" type="audio/wav">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+
+                <div class="fake-audio-item">
+                    <div class="label">TTS Audio 2</div>
+                    <audio id="fake-audio-2" controls>
+                        <source id="fake-source-2" src="" type="audio/wav">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+
+                <div class="fake-audio-item">
+                    <div class="label">TTS Audio 3</div>
+                    <audio id="fake-audio-3" controls>
+                        <source id="fake-source-3" src="" type="audio/wav">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+                <!-- Añade más audios aquí -->
+            </div>
+        </div>
+        <div id="speakerInfo" class="speaker-info"></div>
     </div>
+</div>
 
 <div class="container">
     <h2>Automatic Voice Disorder Detection</h2><br>
