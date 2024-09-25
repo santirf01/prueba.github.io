@@ -316,7 +316,7 @@
 </footer>
     
 <!-- Script para cambiar las imágenes y los audios según el experimento seleccionado -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js">
+<script>
 
     
         var secondSelectCreated = false;
@@ -428,8 +428,7 @@
                 <strong>Gender:</strong> ${speakerInfo.Sexo}<br>
                 <strong>Diagnosis:</strong> ${speakerInfo.Diagnóstico}<br>
                 <strong>Severity (GRBAS-1):</strong> ${speakerInfo['GRBAS-1']}<br>
-                <strong>Severity (GRBAS-2):</strong> ${speakerInfo['GRBAS-2']}
-            `;
+                <strong>Severity (GRBAS-2):</strong> ${speakerInfo['GRBAS-2']}`;
         }
     }
     window.onload = loadCSV;
