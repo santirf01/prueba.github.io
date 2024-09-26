@@ -311,15 +311,13 @@
         <tr>
             <th>Test UMAP SS Representation Evolution </th>
             <td>
-                <select id="showCategory" onchange="showCategory(this.value)">
-                    <option value="Choose">Choose Experiment</option>
-                    <!--<option value="Exp1">Experiment 1</option>
-                    <option value="Exp2">Experiment 2</option>
-                    <option value="Exp3">Experiment 3</option>
-                    <option value="Exp4">Experiment 4</option>-->
-                    <option value="Exp5">Experiment 5</option>
-                    <option value="Exp6">Experiment 6</option>
-                    <option value="Exp7">Experiment 7</option>
+                <select id="act_fold" onchange="choose_fold(this.value)">
+                    <option value="Choose"> Choose fold</option>
+                    <option value="Fold1">Fold 1</option>
+                    <option value="Fold2">Fold 2</option>
+                    <option value="Fold3">Fold 3</option>
+                    <option value="Fold4">Fold 4</option>
+                    <option value="Fold5">Fold 5</option>
                 </select>
             </td>
         </tr>
@@ -339,7 +337,7 @@
     
     <label for="step-slider">Step:</label>
     <input type="range" id="step-slider" min="1000" max="6000" value="6000" step="1000">
-    <span id="step-number">1</span>
+    <span id="step-number">6000</span>
 </div>
 <footer>
     <p>&copy; 2024 Dashboard Elegante. Todos los derechos reservados.</p>
@@ -349,7 +347,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 <script>
                 // Cambia esta URL base por la ruta correcta de tu GitHub donde estén las imágenes
-        const baseUrl = 'https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp6/fold5/';
+        const baseUrl = 'https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp6/';
         var secondSelectCreated = false;
 
         // Función para cargar contenido directamente
@@ -428,7 +426,7 @@
         };
     // CSV
         let speakersData = {};
-        
+        let selectedFold = 'fold5';  // Valor por defecto
         // Función para cargar y procesar el CSV usando PapaParse
         function loadCSV() {
             Papa.parse('https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/speaker_info.csv', {
@@ -467,6 +465,16 @@
                     <strong>Severity (GRBAS-2):</strong> ${speakerInfo['GRBAS-2']}`;
             }
         }
+        function choose_fold(fold) {
+            if (fold !== "Choose") {
+                selectedFold = fold  // Convertimos a minúsculas el nombre del fold
+                // Recargar la imagen al cambiar el fold
+                const step = slider.value;
+                const step_image1 = `${baseUrl}${selectedFold}/step${step}_labels_audio.html`;
+                const step_image2 = `${baseUrl}${selectedFold}/step${step}_labels_speaker.html`;
+                loadContent_steps_image(step_image1, step_image2);
+            }
+        }
     
         const slider = document.getElementById('step-slider');
         const image = document.getElementById('step-image');
@@ -490,8 +498,8 @@
             const step = slider.value;
             stepNumber.textContent = step;
             // Actualizar la fuente de la imagen
-            const step_image1 = `${baseUrl}step${step}_labels_audio.html`;
-            const step_image2 = `${baseUrl}step${step}_labels_speaker.html`;
+            const step_image1 = `${baseUrl}${selectedFold}/step${step}_labels_audio.html`;
+            const step_image2 = `${baseUrl}${selectedFold}/step${step}_labels_speaker.html`;
             loadContent_steps_image(step_image1, step_image2);
         });
     
