@@ -172,6 +172,15 @@
             font-size: 14px;
             color: #555;
         }
+        #image-container_steps {
+            width: 600px;
+            height: 400px;
+            text-align: center;
+        }
+        #image-container_Steps img {
+            max-width: 100%;
+            max-height: 100%;
+        }
     </style>
 </head>
 <body>
@@ -295,7 +304,17 @@
         </tr>
     </table>
 </div>
+<div class="container">
+<h2>Visualización de Steps</h2>
     
+    <div id="image-container_steps">
+        <img id="step-image" src="https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp6/fold5/step6000_labels_speaker.html" alt="Imagen de Step">
+    </div>
+    
+    <label for="step-slider">Step:</label>
+    <input type="range" id="step-slider" min="1000" max="6000" value="6000" step="1000">
+    <span id="step-number">1</span>
+</div>
 <footer>
     <p>&copy; 2024 Dashboard Elegante. Todos los derechos reservados.</p>
 </footer>
@@ -417,7 +436,20 @@
                     <strong>Severity (GRBAS-2):</strong> ${speakerInfo['GRBAS-2']}`;
             }
         }
-        
+    
+        const slider = document.getElementById('step-slider');
+        const image = document.getElementById('step-image');
+        const stepNumber = document.getElementById('step-number');
+
+        // Cambia esta URL base por la ruta correcta de tu GitHub donde estén las imágenes
+        const baseUrl = 'https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp6/fold5/';
+
+        slider.addEventListener('input', function() {
+            const step = slider.value;
+            stepNumber.textContent = step;
+            // Actualizar la fuente de la imagen
+            image.src = `${baseUrl}step${step}_labels_speaker.html`;
+        });
     
     </script>
 
