@@ -348,7 +348,7 @@
 <script>
 
         var secondSelectCreated = false;
-
+        const baseUrl = "https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/";
         // Función para cargar contenido directamente
         function loadContent(url1, url2) {
             var contenidoDiv = document.getElementById("contenido");
@@ -470,9 +470,11 @@
                 selectedFold = fold.toLowerCase();
                 // Recargar la imagen al cambiar el fold
                 const experiment = showCategory.value
+                console.log(experiment);
                 const step = slider.value;
                 const step_image1 = `${baseUrl}${experiment}/${selectedFold}/step${step}_labels_audio.html`;
                 const step_image2 = `${baseUrl}${experiment}/${selectedFold}/step${step}_labels_speaker.html`;
+                 console.log(step_image1);
                 loadContent_steps_image(step_image1, step_image2);
             }
         }
