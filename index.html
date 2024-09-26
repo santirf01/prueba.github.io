@@ -499,7 +499,13 @@
         slider.addEventListener('input', function() {
             const step = slider.value;
             stepNumber.textContent = step;
-            const experiment = showCategory.value
+                // Verifica si se ha seleccionado un experimento
+            const experiment = document.getElementById('showCategory').value;
+            
+            if (experiment === "Choose") {
+                console.log("Please select an experiment first.");
+                return; // Si no se ha seleccionado un experimento, no continúes.
+            }
             // Actualizar la fuente de la imagen
             const step_image1 = `${baseUrl}${experiment}/${selectedFold}/step${step}_labels_audio.html`;
             const step_image2 = `${baseUrl}${experiment}/${selectedFold}/step${step}_labels_speaker.html`;
