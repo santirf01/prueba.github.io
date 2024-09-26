@@ -311,7 +311,7 @@
         <tr>
             <th>Test UMAP SS Representation Evolution </th>
             <td>
-                <select id="act_fold" onchange="choose_fold(this.value)">
+                <select id="act_fold" onchange="choose_fold(this.value,showCategory.value)">
                     <option value="Choose"> Choose fold</option>
                     <option value="Fold1">Fold 1</option>
                     <option value="Fold2">Fold 2</option>
@@ -465,11 +465,11 @@
                     <strong>Severity (GRBAS-2):</strong> ${speakerInfo['GRBAS-2']}`;
             }
         }
-        function choose_fold(fold) {
+        function choose_fold(fold,experiment) {
             if (fold !== "Choose") {
                 selectedFold = fold.toLowerCase();
                 // Recargar la imagen al cambiar el fold
-                const experiment = showCategory.value
+                // const experiment = showCategory.value
                 console.log(experiment);
                 const step = slider.value;
                 const step_image1 = `${baseUrl}${experiment}/${selectedFold}/step${step}_labels_audio.html`;
