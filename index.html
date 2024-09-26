@@ -309,7 +309,7 @@
     
      <table>
         <tr>
-            <th olspan="2">Test UMAP SS Representation Evolution </th>
+            <th colspan="2">Test UMAP SS Representation Evolution </th>
         </tr>
         <tr>
             <td><h3><center>UMAP by Audio</center></h3></td>
@@ -478,7 +478,7 @@
             const step = slider.value;
             stepNumber.textContent = step;
             // Actualizar la fuente de la imagen
-            const step_image1 = `${baseUrl}step${step}_labels_speaker.html`;
+            const step_image1 = `${baseUrl}step${step}_labels_audio.html`;
             const step_image2 = `${baseUrl}step${step}_labels_speaker.html`;
             loadContent_steps_image(step_image1, step_image2);
         });
