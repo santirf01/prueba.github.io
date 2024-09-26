@@ -308,7 +308,8 @@
 <h2>Visualización de Steps</h2>
     
     <div id="image-container_steps">
-        <img id="step-image" src="https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp6/fold5/step6000_labels_speaker.html" alt="Imagen de Step">
+        <div id="contenido_steps"></div>
+        <!--<img id="step-image" src="https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp6/fold5/step6000_labels_speaker.html" alt="Imagen de Step">-->
     </div>
     
     <label for="step-slider">Step:</label>
@@ -322,7 +323,8 @@
 <!-- Script para cambiar las imágenes y los audios según el experimento seleccionado -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 <script>
-    
+                // Cambia esta URL base por la ruta correcta de tu GitHub donde estén las imágenes
+        const baseUrl = 'https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp6/fold5/';
         var secondSelectCreated = false;
 
         // Función para cargar contenido directamente
@@ -394,6 +396,10 @@
             loadCSV();
             updateAudioSources(document.getElementById("speaker-select").value);
             updateSpeaker(document.getElementById("speaker-select").value);
+            const initialStep = slider.value;
+            const step_image1 = `${baseUrl}step${initialStep}_labels_speaker.html`;
+            const step_image2 = `${baseUrl}step${initialStep}_labels_speaker.html`;
+            loadContent_steps_image(step_image1, step_image2);
         };
     // CSV
         let speakersData = {};
@@ -441,14 +447,27 @@
         const image = document.getElementById('step-image');
         const stepNumber = document.getElementById('step-number');
 
-        // Cambia esta URL base por la ruta correcta de tu GitHub donde estén las imágenes
-        const baseUrl = 'https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp6/fold5/';
+        function loadContent_steps_image(url1, url2) {
+            var contenidoDiv = document.getElementById("contenido");
+            if (url1 && url2) {
+                contenidoDiv.innerHTML = `
+                    <div class="image-container">
+                        <iframe src="${url1}" width="840" height="640"></iframe>
+                        <iframe src="${url2}" width="840" height="640"></iframe>
+                    </div>`;
+            } else {
+                contenidoDiv.innerHTML = ""; 
+            }
+        }
+
 
         slider.addEventListener('input', function() {
             const step = slider.value;
             stepNumber.textContent = step;
             // Actualizar la fuente de la imagen
-            image.src = `${baseUrl}step${step}_labels_speaker.html`;
+            const step_image1 = `${baseUrl}step${step}_labels_speaker.html`;
+            const step_image2 = `${baseUrl}step${step}_labels_speaker.html`;
+            loadContent_steps_image(step_image1, step_image2);
         });
     
     </script>
