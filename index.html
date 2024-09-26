@@ -467,7 +467,7 @@
         }
         function choose_fold(fold) {
             if (fold !== "Choose") {
-                selectedFold = fold  // Convertimos a minúsculas el nombre del fold
+                selectedFold = fold.toLowerCase();
                 // Recargar la imagen al cambiar el fold
                 const step = slider.value;
                 const step_image1 = `${baseUrl}${selectedFold}/step${step}_labels_audio.html`;
