@@ -366,24 +366,23 @@
 
         // Mostrar contenido según el experimento seleccionado
         function showCategory(experiment) {
-            if (experiment=="Choose") {
-                // Si no se selecciona un experimento, vaciar contenido
+            if (experiment === "Choose") {
                 loadContent(null, null);
                 return;
             }
-        
-            // Base URL donde están los archivos HTML para UMAP
-            const baseUrl = "https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/";
-        
-            // Generar las URLs para "First steps" y "Final steps" dinámicamente
+            
             const firstStepsUrl = `${baseUrl}${experiment}/${experiment}_first_steps.html`;
             const finalStepsUrl = `${baseUrl}${experiment}/${experiment}_final_steps.html`;
-            // Cargar las dos URLs
-            console.log(firstStepsUrl, finalStepsUrl);
             loadContent(firstStepsUrl, finalStepsUrl);
             
-        
-        }
+            // Si ya se ha seleccionado un fold, cargar también los pasos
+            if (selectedFold !== 'Choose') {
+                const step = slider.value;
+                const step_image1 = `${baseUrl}${experiment}/${selectedFold}/step${step}_labels_audio.html`;
+                const step_image2 = `${baseUrl}${experiment}/${selectedFold}/step${step}_labels_speaker.html`;
+                loadContent_steps_image(step_image1, step_image2);
+            }
+        }    
 
     
         function updateAudioSources(speaker) {
@@ -438,10 +437,10 @@
                 }
             });
         }
-        
         // Función para llenar el selector de speakers
         function populateSpeakerSelect() {
             const select = document.getElementById('speaker-select');
+            select.innerHTML = ""; // Limpiar antes de añadir nuevas opciones
             speakersData.forEach(speaker => {
                 const option = document.createElement('option');
                 option.value = speaker.Código;
@@ -449,6 +448,8 @@
                 select.appendChild(option);
             });
         }
+
+        
         
         // Función para actualizar la información y los audios cuando se selecciona un speaker
         function updateSpeaker(selectedSpeaker) {
@@ -465,19 +466,17 @@
                     <strong>Severity (GRBAS-2):</strong> ${speakerInfo['GRBAS-2']}`;
             }
         }
-        function choose_fold(fold,experiment) {
-            if (fold !== "Choose") {
+        function choose_fold(fold, experiment) {
+            if (fold !== "Choose" && experiment !== "Choose") {
                 selectedFold = fold.toLowerCase();
-                // Recargar la imagen al cambiar el fold
-                // const experiment = showCategory.value
-                console.log(experiment);
                 const step = slider.value;
                 const step_image1 = `${baseUrl}${experiment}/${selectedFold}/step${step}_labels_audio.html`;
                 const step_image2 = `${baseUrl}${experiment}/${selectedFold}/step${step}_labels_speaker.html`;
-                 console.log(step_image1);
+                console.log(step_image1, step_image2);
                 loadContent_steps_image(step_image1, step_image2);
             }
         }
+
     
         const slider = document.getElementById('step-slider');
         const image = document.getElementById('step-image');
