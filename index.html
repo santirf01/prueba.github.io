@@ -346,8 +346,7 @@
 <!-- Script para cambiar las imágenes y los audios según el experimento seleccionado -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 <script>
-                // Cambia esta URL base por la ruta correcta de tu GitHub donde estén las imágenes
-        const baseUrl = 'https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp6/';
+
         var secondSelectCreated = false;
 
         // Función para cargar contenido directamente
@@ -382,6 +381,7 @@
             // Cargar las dos URLs
             console.log(firstStepsUrl, finalStepsUrl);
             loadContent(firstStepsUrl, finalStepsUrl);
+            
         
         }
 
@@ -419,10 +419,10 @@
             loadCSV();
             updateAudioSources(document.getElementById("speaker-select").value);
             updateSpeaker(document.getElementById("speaker-select").value);
-            const initialStep = slider.value;
-            const step_image1 = `${baseUrl}step${initialStep}_labels_audio.html`;
-            const step_image2 = `${baseUrl}step${initialStep}_labels_speaker.html`;
-            loadContent_steps_image(step_image1, step_image2);
+            //const initialStep = slider.value;
+            //const step_image1 = `${baseUrl}${experiment}/${selectedFold}/step${step}_labels_audio.html`;
+            //const step_image2 = `${baseUrl}${experiment}/${selectedFold}/step${step}_labels_speaker.html`;
+            //loadContent_steps_image(step_image1, step_image2);
         };
     // CSV
         let speakersData = {};
@@ -469,9 +469,10 @@
             if (fold !== "Choose") {
                 selectedFold = fold.toLowerCase();
                 // Recargar la imagen al cambiar el fold
+                const experiment = showCategory.value
                 const step = slider.value;
-                const step_image1 = `${baseUrl}${selectedFold}/step${step}_labels_audio.html`;
-                const step_image2 = `${baseUrl}${selectedFold}/step${step}_labels_speaker.html`;
+                const step_image1 = `${baseUrl}${experiment}/${selectedFold}/step${step}_labels_audio.html`;
+                const step_image2 = `${baseUrl}${experiment}/${selectedFold}/step${step}_labels_speaker.html`;
                 loadContent_steps_image(step_image1, step_image2);
             }
         }
@@ -497,9 +498,10 @@
         slider.addEventListener('input', function() {
             const step = slider.value;
             stepNumber.textContent = step;
+            const experiment = showCategory.value
             // Actualizar la fuente de la imagen
-            const step_image1 = `${baseUrl}${selectedFold}/step${step}_labels_audio.html`;
-            const step_image2 = `${baseUrl}${selectedFold}/step${step}_labels_speaker.html`;
+            const step_image1 = `${baseUrl}${experiment}/${selectedFold}/step${step}_labels_audio.html`;
+            const step_image2 = `${baseUrl}${experiment}/${selectedFold}/step${step}_labels_speaker.html`;
             loadContent_steps_image(step_image1, step_image2);
         });
     
