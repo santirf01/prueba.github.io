@@ -159,7 +159,9 @@ async function loadExperimentList() {
 async function toggleExperiment(folder) {
     const experimentFile = `https://raw.githubusercontent.com/santirf01/Data_logger/refs/heads/main/${folder}/train.txt`;
 
-    const existingTraces = document.getElementById('chart').data;
+    const chartDiv = document.getElementById('chart');
+    const existingTraces = chartDiv.data || []; // Asegúrate de manejar el caso en que no hay datos
+
     const isAlreadyAdded = existingTraces.some(trace => trace.name === folder);
 
     if (isAlreadyAdded) {
@@ -171,28 +173,29 @@ async function toggleExperiment(folder) {
             const response = await fetch(experimentFile);
             if (!response.ok) throw new Error('Network response was not ok');
             const data = await response.text();
-            const parsedData = parseExperimentData(data);
+            const parsedData = parseExperimentData(data,folder);
             addDataToPlot({ legend: folder, ...parsedData });
         } catch (error) {
             console.error('Error loading experiment data:', error);
         }
     }
 }
-function parseExperimentData(data) {
-    // Implementa el análisis de datos aquí, dependiendo del formato de 'train.txt'
-    // Devuelve un objeto con las propiedades necesarias para Plotly
+function parseExperimentData(data, folder) {
+    // Lógica para analizar los datos aquí
     return {
         x: [], // eje X
         y: [], // eje Y
-        name: folder, // o el nombre que quieras
+        name: folder, // Usa el nombre de la carpeta
         type: 'scatter' // o el tipo de gráfico que necesites
     };
 }
 
+
 function addDataToPlot(data) {
     const chartDiv = document.getElementById('chart');
-    Plotly.addTraces(chartDiv, data);
+    Plotly.addTraces(chartDiv, [data]); // Añade como un array
 }
+
 
 // Eliminar un experimento de la gráfica
 function removeExperimentFromPlot(legend) {
