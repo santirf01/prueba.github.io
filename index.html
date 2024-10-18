@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="styles/styles.css">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <style>
-{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -115,6 +115,13 @@ footer p {
             <div id="chart"></div>
         </div>
     </div>
+    <div class="card">
+        <label for="experiment-select">Choose an Experiment:</label>
+        <select id="experiment-select" onchange="loadExperimentData()">
+            <option value="" disabled selected>Select an experiment</option>
+        </select>
+        <button id="remove-experiment-button">Eliminar Experimento Seleccionado</button>
+    </div>
 
     <!--<footer>
         <p>Created with <i class="fas fa-heart"></i> by Your Name</p>
@@ -132,7 +139,7 @@ async function loadExperimentList() {
     const select = document.getElementById('experiment-select');
     experimentFolders.forEach(folder => {
         const option = document.createElement('option');
-        option.value = `https://github.com/santirf01/Data_logger/blob/77fdceff58c516956786608c6b75ee2717ce6334/${folder}/train.txt`;
+        option.value = `https://raw.githubusercontent.com/santirf01/Data_logger/77fdceff58c516956786608c6b75ee2717ce6334/${folder}/train.txt`;
         option.textContent = folder;
         select.appendChild(option);
     });
@@ -144,12 +151,15 @@ async function loadExperimentData() {
     const experimentFile = select.value;
 
     if (experimentFile) {
-        const response = await fetch(experimentFile);
-        const data = await response.text();
-
-        const parsedData = parseExperimentData(data);
-        console.log(parsedData);
-        addDataToPlot(parsedData);
+        try {
+            const response = await fetch(experimentFile);
+            if (!response.ok) throw new Error('Network response was not ok');
+            const data = await response.text();
+            const parsedData = parseExperimentData(data);
+            console.log(data);
+            addDataToPlot(parsedData);
+        } catch (error) {
+            console.error('Error loading experiment data:', error);
     }
 }
 
