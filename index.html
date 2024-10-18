@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <style>
-* {
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -150,7 +150,7 @@ async function loadExperimentList() {
     experimentFolders.forEach(folder => {
         const button = document.createElement('button');
         button.textContent = folder;
-        button.className = 'experiment-button';
+        button.className = '.experiment-button';
         button.dataset.folder = folder; // Almacena el nombre de la carpeta
         button.onclick = () => toggleExperiment(folder); // Llama a la función al hacer clic
         buttonContainer.appendChild(button);
@@ -159,7 +159,7 @@ async function loadExperimentList() {
 
 // Función para agregar o eliminar un experimento
 async function toggleExperiment(folder) {
-    const experimentFile = `https://raw.githubusercontent.com/santirf01/Data_logger/refs/heads/main/${folder}/train.txt`${folder}/train.txt`;
+    const experimentFile = `https://raw.githubusercontent.com/santirf01/Data_logger/refs/heads/main/${folder}/train.txt`;
 
     const existingTraces = document.getElementById('chart').data;
     const isAlreadyAdded = existingTraces.some(trace => trace.name === folder);
