@@ -133,7 +133,7 @@ footer p {
         const select = document.getElementById('experiment-select');
         experimentFolders.forEach(folder => {
             const option = document.createElement('option');
-            option.value = `https://raw.githubusercontent.com/santirf01/Data_logger/77fdceff58c516956786608c6b75ee2717ce6334/${folder}/train.txt`;
+            option.value = `https://raw.githubusercontent.com/santirf01/Data_logger/refs/heads/main/${folder}/train.txt`;
             option.textContent = folder;
             select.appendChild(option);
         });
@@ -183,7 +183,23 @@ footer p {
             name: legend,
             line: { shape: 'linear' }
         };
-
+        // Configura el layout con etiquetas de los ejes
+        const layout = {
+            title: 'P2 Loss', // Título de la gráfica
+            xaxis: {
+                title: 'It.' // Cambia este texto por el nombre que desees para el eje X
+            },
+            yaxis: {
+                title: 'Loss' // Cambia este texto por el nombre que desees para el eje Y
+            },
+            legend: {
+                orientation: 'h', // Cambia la orientación de la leyenda a horizontal
+                x: 0.5,
+                y: -0.2,
+                xanchor: 'center',
+                yanchor: 'bottom'
+            }
+        };
         Plotly.newPlot('chart', [trace]); // Inicializa la gráfica si no existe
     }
 
