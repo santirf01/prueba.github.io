@@ -143,14 +143,15 @@ footer p {
     async function loadExperimentData() {
         const select = document.getElementById('experiment-select');
         const experimentFile = select.value;
-
+    
         if (experimentFile) {
             try {
                 const response = await fetch(experimentFile);
                 if (!response.ok) throw new Error('Network response was not ok');
                 const data = await response.text();
                 const parsedData = parseExperimentData(data);
-                addDataToPlot(parsedData);
+                console.log(data);
+                addDataToPlot(parsedData); // Solo añade la nueva traza
             } catch (error) {
                 console.error('Error loading experiment data:', error);
             }
@@ -203,16 +204,20 @@ footer p {
         Plotly.newPlot('chart', [trace]); // Inicializa la gráfica si no existe
     }
 
-    // Función para eliminar un experimento de la gráfica
+    document.getElementById('remove-experiment-button').addEventListener('click', () => {
+        const select = document.getElementById('experiment-select');
+        const legend = select.options[select.selectedIndex].text;
+        removeExperimentFromPlot(legend);
+    });
+    
     function removeExperimentFromPlot(legend) {
         const chartDiv = document.getElementById('chart');
         const traceIndex = chartDiv.data.findIndex(trace => trace.name === legend);
-
+    
         if (traceIndex !== -1) {
             Plotly.deleteTraces('chart', traceIndex);
         }
     }
-
     // Inicializa el listado de experimentos cuando la página carga
     document.addEventListener('DOMContentLoaded', loadExperimentList);
 
