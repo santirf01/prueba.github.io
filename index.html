@@ -150,7 +150,7 @@ async function loadExperimentList() {
     experimentFolders.forEach(folder => {
         const button = document.createElement('button');
         button.textContent = folder;
-        button.className = '.experiment-button';
+        button.className = 'experiment-button';
         button.dataset.folder = folder; // Almacena el nombre de la carpeta
         button.onclick = () => toggleExperiment(folder); // Llama a la función al hacer clic
         buttonContainer.appendChild(button);
