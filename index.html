@@ -178,6 +178,21 @@ async function toggleExperiment(folder) {
         }
     }
 }
+function parseExperimentData(data) {
+    // Implementa el análisis de datos aquí, dependiendo del formato de 'train.txt'
+    // Devuelve un objeto con las propiedades necesarias para Plotly
+    return {
+        x: [], // eje X
+        y: [], // eje Y
+        name: folder, // o el nombre que quieras
+        type: 'scatter' // o el tipo de gráfico que necesites
+    };
+}
+
+function addDataToPlot(data) {
+    const chartDiv = document.getElementById('chart');
+    Plotly.addTraces(chartDiv, data);
+}
 
 // Eliminar un experimento de la gráfica
 function removeExperimentFromPlot(legend) {
@@ -192,6 +207,6 @@ function removeExperimentFromPlot(legend) {
 // Inicializa el listado de experimentos cuando la página carga
 document.addEventListener('DOMContentLoaded', loadExperimentList);
 
-    </script>
+</script>
 </html>
 
