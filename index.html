@@ -127,7 +127,7 @@ footer p {
     // Función para cargar la lista de experimentos (carpetas) y actualizar el selector
 async function loadExperimentList() {
     // Array manual con los nombres de las carpetas de experimentos
-    const experimentFolders = ['18-10-2024_11-46_exp_LSTM_IMDB_32_10','18-10-2024_11-50_exp_BiLSTM_IMDB_32_10']; // Sustituye estos nombres por los de tus carpetas
+    const experimentFolders = ['18-10-2024_11-46_exp_LSTM_IMDB_32_10', '18-10-2024_11-50_exp_BiLSTM_IMDB_32_10']; // Sustituye estos nombres por los de tus carpetas
 
     const select = document.getElementById('experiment-select');
     experimentFolders.forEach(folder => {
@@ -138,7 +138,7 @@ async function loadExperimentList() {
     });
 }
 
-// Función para cargar los datos de un experimento y generar la gráfica
+// Función para cargar los datos de un experimento y agregarlo a la gráfica
 async function loadExperimentData() {
     const select = document.getElementById('experiment-select');
     const experimentFile = select.value;
@@ -148,7 +148,7 @@ async function loadExperimentData() {
         const data = await response.text();
 
         const parsedData = parseExperimentData(data);
-        plotData(parsedData);
+        addDataToPlot(parsedData);
     }
 }
 
@@ -169,8 +169,8 @@ function parseExperimentData(data) {
     return { legend, xValues, yValues };
 }
 
-// Función para graficar los datos usando Plotly
-function plotData({ legend, xValues, yValues }) {
+// Función para agregar datos a la gráfica existente usando Plotly
+function addDataToPlot({ legend, xValues, yValues }) {
     const trace = {
         x: xValues,
         y: yValues,
@@ -179,17 +179,28 @@ function plotData({ legend, xValues, yValues }) {
         line: { shape: 'linear' }
     };
 
-    const layout = {
-        title: `Gráfico del experimento: ${legend}`,
-        xaxis: { title: 'Iteraciones' },
-        yaxis: { title: 'Valores' }
-    };
+    Plotly.addTraces('chart', trace);
+}
 
-    Plotly.newPlot('chart', [trace], layout);
+// Función para eliminar un experimento de la gráfica
+function removeExperimentFromPlot(legend) {
+    const chartDiv = document.getElementById('chart');
+    const traceIndex = chartDiv.data.findIndex(trace => trace.name === legend);
+
+    if (traceIndex !== -1) {
+        Plotly.deleteTraces('chart', traceIndex);
+    }
 }
 
 // Inicializa el listado de experimentos cuando la página carga
 document.addEventListener('DOMContentLoaded', loadExperimentList);
+
+// Event listener para eliminar un experimento de la gráfica
+document.getElementById('remove-experiment-button').addEventListener('click', () => {
+    const select = document.getElementById('experiment-select');
+    const legend = select.options[select.selectedIndex].text;
+    removeExperimentFromPlot(legend);
+});
 
 
 </script>
