@@ -1,26 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
+    /* Reset de estilos para un diseño limpio */
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+body {
+    background-color: #f3f4f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #333;
+}
+
+.container {
+    max-width: 900px;
+    width: 90%;
+    text-align: center;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 2rem;
+}
+
+header {
+    margin-bottom: 1.5rem;
+}
+
+header h1 {
+    font-size: 2.2rem;
+    color: #333;
+    margin-bottom: 0.3rem;
+}
+
+header p {
+    color: #777;
+}
+
+.card {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+label {
+    font-size: 1.1rem;
+    margin-right: 0.5rem;
+    color: #555;
+}
+
+select {
+    padding: 0.6rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+select:hover {
+    background-color: #e6e6e6;
+}
+
+#chart {
+    height: 500px;
+}
+
+footer {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: #777;
+}
+
+footer i {
+    color: #ff5e5e;
+}
+
+footer p {
+    margin-top: 0.5rem;
+}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard de Experimentos</title>
+    <title>Experiment Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="styles/styles.css">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
-    <h1>Dashboard de Experimentos</h1>
-    <label for="experiment-select">Selecciona un experimento:</label>
-    <select id="experiment-select" onchange="loadExperimentData()">
-        <option value="">Seleccione un experimento</option>
-    </select>
-    <div id="chart"></div>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-chart-line"></i> Experiment Dashboard</h1>
+            <p>Select and visualize your experiments in an elegant way</p>
+        </header>
+
+        <div class="card">
+            <label for="experiment-select">Choose an Experiment:</label>
+            <select id="experiment-select" onchange="loadExperimentData()">
+                <option value="" disabled selected>Select an experiment</option>
+            </select>
+        </div>
+
+        <div class="card">
+            <div id="chart"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Created with <i class="fas fa-heart"></i> by Your Name</p>
+    </footer>
 
     <script src="scripts/app.js"></script>
 </body>
+
 <script>
 // Función para cargar la lista de archivos .txt de la carpeta "data"
 async function loadExperimentList() {
-    const response = await fetch('data/');
+    const response = await fetch('https://github.com/santirf01/Data_logger/blob/main/');
     const text = await response.text();
     const parser = new DOMParser();
     const doc = parser.parseFromString(text, 'text/html');
