@@ -132,7 +132,7 @@ async function loadExperimentList() {
     const select = document.getElementById('experiment-select');
     experimentFolders.forEach(folder => {
         const option = document.createElement('option');
-        option.value = `data/${folder}/train.txt`;
+        option.value = `https://github.com/santirf01/Data_logger/blob/77fdceff58c516956786608c6b75ee2717ce6334/${folder}/train.txt`;
         option.textContent = folder;
         select.appendChild(option);
     });
