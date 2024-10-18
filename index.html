@@ -99,7 +99,7 @@ footer p {
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 5px;
-    background-color: #007BFF;
+    background-color:  #eceff1;
     color: white;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -159,7 +159,7 @@ async function loadExperimentList() {
 
 // Función para agregar o eliminar un experimento
 async function toggleExperiment(folder) {
-    const experimentFile = `https://raw.githubusercontent.com/santirf01/Data_logger/77fdceff58c516956786608c6b75ee2717ce6334/${folder}/train.txt`;
+    const experimentFile = `https://raw.githubusercontent.com/santirf01/Data_logger/refs/heads/main/${folder}/train.txt`${folder}/train.txt`;
 
     const existingTraces = document.getElementById('chart').data;
     const isAlreadyAdded = existingTraces.some(trace => trace.name === folder);
