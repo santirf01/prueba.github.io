@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Experiment Dashboard</title>
-    <link rel="icon" href="favicon.ico"></link>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <style>
@@ -125,90 +125,87 @@ footer p {
 </body>
 
 <script>
-    // Función para cargar la lista de experimentos (carpetas) y actualizar el selector
-async function loadExperimentList() {
-    // Array manual con los nombres de las carpetas de experimentos
-    console.log("AQUI");
-    const experimentFolders = ['18-10-2024_11-46_exp_LSTM_IMDB_32_10', '18-10-2024_12-14_exp_BiLSTM_IMDB_32_10']; // Sustituye estos nombres por los de tus carpetas
+// Función para cargar la lista de experimentos (carpetas) y actualizar el selector
+    async function loadExperimentList() {
+        // Array manual con los nombres de las carpetas de experimentos
+        const experimentFolders = ['18-10-2024_11-46_exp_LSTM_IMDB_32_10', '18-10-2024_12-14_exp_BiLSTM_IMDB_32_10'];
 
-    const select = document.getElementById('experiment-select');
-    experimentFolders.forEach(folder => {
-        const option = document.createElement('option');
-        option.value = `https://raw.githubusercontent.com/santirf01/Data_logger/77fdceff58c516956786608c6b75ee2717ce6334/${folder}/train.txt`;
-        option.textContent = folder;
-        select.appendChild(option);
-    });
-}
-
-// Función para cargar los datos de un experimento y agregarlo a la gráfica
-async function loadExperimentData() {
-    const select = document.getElementById('experiment-select');
-    const experimentFile = select.value;
-
-    if (experimentFile) {
-        try {
-            const response = await fetch(experimentFile);
-            if (!response.ok) throw new Error('Network response was not ok');
-            const data = await response.text();
-            const parsedData = parseExperimentData(data);
-            console.log(data);
-            addDataToPlot(parsedData);
-        } catch (error) {
-            console.error('Error loading experiment data:', error);
+        const select = document.getElementById('experiment-select');
+        experimentFolders.forEach(folder => {
+            const option = document.createElement('option');
+            option.value = `https://raw.githubusercontent.com/santirf01/Data_logger/77fdceff58c516956786608c6b75ee2717ce6334/${folder}/train.txt`;
+            option.textContent = folder;
+            select.appendChild(option);
+        });
     }
-}
 
-// Función para convertir el contenido del archivo results.txt a un formato entendible
-function parseExperimentData(data) {
-    const lines = data.split('\n');
-    const legend = lines[0].trim();
-    const xValues = [];
-    const yValues = [];
+    // Función para cargar los datos de un experimento y agregarlo a la gráfica
+    async function loadExperimentData() {
+        const select = document.getElementById('experiment-select');
+        const experimentFile = select.value;
 
-    for (let i = 1; i < lines.length; i++) {
-        const [x, y] = lines[i].trim().split(/\s+/);
-        if (x && y) {
-            xValues.push(parseFloat(x));
-            yValues.push(parseFloat(y));
+        if (experimentFile) {
+            try {
+                const response = await fetch(experimentFile);
+                if (!response.ok) throw new Error('Network response was not ok');
+                const data = await response.text();
+                const parsedData = parseExperimentData(data);
+                addDataToPlot(parsedData);
+            } catch (error) {
+                console.error('Error loading experiment data:', error);
+            }
         }
     }
-    return { legend, xValues, yValues };
-}
 
-// Función para agregar datos a la gráfica existente usando Plotly
-function addDataToPlot({ legend, xValues, yValues }) {
-    const trace = {
-        x: xValues,
-        y: yValues,
-        mode: 'lines+markers',
-        name: legend,
-        line: { shape: 'linear' }
-    };
+    // Función para convertir el contenido del archivo results.txt a un formato entendible
+    function parseExperimentData(data) {
+        const lines = data.split('\n');
+        const legend = lines[0].trim();
+        const xValues = [];
+        const yValues = [];
 
-    Plotly.addTraces('chart', trace);
-}
-
-// Función para eliminar un experimento de la gráfica
-function removeExperimentFromPlot(legend) {
-    const chartDiv = document.getElementById('chart');
-    const traceIndex = chartDiv.data.findIndex(trace => trace.name === legend);
-
-    if (traceIndex !== -1) {
-        Plotly.deleteTraces('chart', traceIndex);
+        for (let i = 1; i < lines.length; i++) {
+            const [x, y] = lines[i].trim().split(/\s+/);
+            if (x && y) {
+                xValues.push(parseFloat(x));
+                yValues.push(parseFloat(y));
+            }
+        }
+        return { legend, xValues, yValues };
     }
-}
 
-// Inicializa el listado de experimentos cuando la página carga
-document.addEventListener('DOMContentLoaded', loadExperimentList);
+    // Función para agregar datos a la gráfica existente usando Plotly
+    function addDataToPlot({ legend, xValues, yValues }) {
+        const trace = {
+            x: xValues,
+            y: yValues,
+            mode: 'lines+markers',
+            name: legend,
+            line: { shape: 'linear' }
+        };
 
-// Event listener para eliminar un experimento de la gráfica
-document.getElementById('remove-experiment-button').addEventListener('click', () => {
-    const select = document.getElementById('experiment-select');
-    const legend = select.options[select.selectedIndex].text;
-    removeExperimentFromPlot(legend);
-});
+        Plotly.newPlot('chart', [trace]); // Inicializa la gráfica si no existe
+    }
 
+    // Función para eliminar un experimento de la gráfica
+    function removeExperimentFromPlot(legend) {
+        const chartDiv = document.getElementById('chart');
+        const traceIndex = chartDiv.data.findIndex(trace => trace.name === legend);
 
-</script>
+        if (traceIndex !== -1) {
+            Plotly.deleteTraces('chart', traceIndex);
+        }
+    }
+
+    // Inicializa el listado de experimentos cuando la página carga
+    document.addEventListener('DOMContentLoaded', loadExperimentList);
+
+    // Event listener para eliminar un experimento de la gráfica
+    document.getElementById('remove-experiment-button').addEventListener('click', () => {
+        const select = document.getElementById('experiment-select');
+        const legend = select.options[select.selectedIndex].text;
+        removeExperimentFromPlot(legend);
+    });
+    </script>
 </html>
 
