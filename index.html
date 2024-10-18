@@ -201,7 +201,7 @@ footer p {
                 yanchor: 'bottom'
             }
         };
-        Plotly.newPlot('chart', [trace]); // Inicializa la gráfica si no existe
+        Plotly.addTraces('chart', trace);// Inicializa la gráfica si no existe
     }
 
     document.getElementById('remove-experiment-button').addEventListener('click', () => {
