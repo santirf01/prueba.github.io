@@ -120,7 +120,7 @@ footer p {
         </header>
 
         
-        <<div class="card" id="experiment-buttons">
+        <div class="card" id="experiment-buttons">
             <p>Seleccione un Experimento:</p>
             <!-- Aquí se generarán los botones dinámicamente -->
         </div>
@@ -144,7 +144,7 @@ footer p {
 // Función para cargar la lista de experimentos (carpetas) y actualizar el selector
     // Función para cargar la lista de experimentos y crear botones
 async function loadExperimentList() {
-    const experimentFolders = ['18-10-2024_11-46_exp_LSTM_IMDB_32_10', '18-10-2024_12-14_exp_BiLSTM_IMDB_32_10']; // Nombres de las carpetas
+    const experimentFolders = ['18-10-2024_11-46_exp_LSTM_IMDB_32_10', '18-10-2024_12-14_exp_BiLSTM_IMDB_32_10','18-10-2024_12-30_exp_GRU_IMDB_32_10']; // Nombres de las carpetas
 
     const buttonContainer = document.getElementById('experiment-buttons');
     experimentFolders.forEach(folder => {
