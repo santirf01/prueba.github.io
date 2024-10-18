@@ -158,35 +158,44 @@ async function loadExperimentList() {
 // Función para agregar o eliminar un experimento
 async function toggleExperiment(folder) {
     const experimentFile = `https://raw.githubusercontent.com/santirf01/Data_logger/refs/heads/main/${folder}/train.txt`;
-
     const chartDiv = document.getElementById('chart');
-    const existingTraces = chartDiv.data || []; // Asegúrate de manejar el caso en que no hay datos
+    const existingTraces = chartDiv.data || [];
 
     const isAlreadyAdded = existingTraces.some(trace => trace.name === folder);
 
     if (isAlreadyAdded) {
-        // Si ya está, eliminar la traza
         removeExperimentFromPlot(folder);
     } else {
-        // Si no está, cargar los datos y añadir la traza
         try {
             const response = await fetch(experimentFile);
             if (!response.ok) throw new Error('Network response was not ok');
             const data = await response.text();
-            const parsedData = parseExperimentData(data,folder);
-            addDataToPlot({ legend: folder, ...parsedData });
+            const parsedData = parseExperimentData(data, folder);
+            console.log(parsedData); // Verifica la estructura de datos
+            addDataToPlot(parsedData);
         } catch (error) {
             console.error('Error loading experiment data:', error);
+            alert('Error loading experiment data. Please try again.');
         }
     }
 }
+
 function parseExperimentData(data, folder) {
-    // Lógica para analizar los datos aquí
+    const parsedData = data.split('\n').reduce((acc, line) => {
+        const [xValue, yValue] = line.split(','); // Ajusta según el formato de tus datos
+        if (xValue && yValue) {
+            acc.x.push(parseFloat(xValue));
+            acc.y.push(parseFloat(yValue));
+        }
+        return acc;
+    }, { x: [], y: [] });
+
     return {
-        x: [], // eje X
-        y: [], // eje Y
-        name: folder, // Usa el nombre de la carpeta
-        type: 'scatter' // o el tipo de gráfico que necesites
+        x: parsedData.x,
+        y: parsedData.y,
+        name: folder,
+        type: 'scatter',
+        mode: 'lines+markers' // Opcional, ajusta según tus necesidades
     };
 }
 
