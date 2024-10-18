@@ -1,518 +1,92 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Assessing the Impact and Potential of TTS for Pathological Voice Data Augmentation on Pathology Detection Systems</title>
-    <!-- Fuentes de Google -->
-     <link rel="icon" href="https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/Imagenes/favicon.ico" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <!-- CSS para estilo -->
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color:  #f4f7fa;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        header {
-            background-color:  #2c3e50; 
-            color: white;
-            padding: 20px;
-            width: 100%;
-            text-align: center;
-        }
-        subheader {
-            background-color:  #85929e; 
-            color: white;
-            padding: 15px;
-            width: 100%;
-        }
-        h1 {
-            margin: 0;
-            font-size: 2rem;
-        }
-        .container {
-            width: 80%;
-            margin: 20px auto;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .logo-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-        }
-        .logo {
-            width: 120px; /* Aumentar el tamaño del logo */
-            height: auto;
-            margin: 0 20px;
-        }
-        .card {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .card h2 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: #34495e;
-        }
-        .card img, .card audio {
-            max-width: 100%;
-            height: auto;
-            margin-top: 10px;
-        }
-       audio {
-            width: 100%;
-            margin-top: 10px;
-        }
-        footer {
-            background-color: #2c3e50;
-            color: white;
-            padding: 10px;
-            text-align: center;
-            width: 100%;
-        }
-        .selector-container {
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        select {
-            padding: 10px;
-            font-size: 1rem;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-        table {
-            width: 100%;
-            margin-bottom: 20px;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 10px;
-            border: 1px solid #ddd;
-            text-align: center;
-        }
-        .image-container {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        iframe {
-            border: none;
-        }
-        h2 {
-            font-size: 1.8rem; /* Aumentar el tamaño del texto */
-            text-align: center; /* Centrar el texto */
-            margin: 0 20px; /* Espaciado entre el texto y los logos */
-        }
-        p {
-            text-align: center; /* Centrar el párrafo */
-            margin: 5px 0; /* Espaciado alrededor del párrafo */
-            font-size: 1.2rem; /* Tamaño del texto */
-        }
-        .audio-player {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 30px;
-        }
-
-        .player-box {
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 10px;
-            width: 45%;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .player-box audio {
-            width: 100%;
-        }
-
-        .label {
-            font-size: 18px;
-            font-weight: bold;
-            color: #555;
-            margin-bottom: 10px;
-        }
-
-        .fake-audios {
-            margin-top: 20px;
-        }
-
-        .fake-audio-item {
-            margin-bottom: 15px;
-        }
-         select_audio {
-            font-size: 16px;
-            padding: 5px;
-            margin-bottom: 20px;
-        }
-        .label_audio {
-            font-size: 16px;
-            color: #4a90e2;
-            margin-bottom: 5px;
-        }
-        .speaker-info {
-            margin-top: 10px;
-            font-style: italic;
-            font-size: 14px;
-            color: #555;
-        }
-        #image-container_steps {
-            width: 600px;
-            height: 400px;
-            text-align: center;
-        }
-        #image-container_Steps img {
-            max-width: 100%;
-            max-height: 100%;
-        }
-    </style>
+    <title>Dashboard de Experimentos</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
-
-<header>
-        
-        <h1>Assessing the Impact and Potential of TTS for Pathological Voice Data Augmentation on Pathology Detection Systems</h1>
-        
-</header>
-<subheader>
-    <div class="logo-container">
-        <img src="https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/Imagenes/Unizar.png" alt="Logo Universidad" class="logo">
-        <h2>Authors:</h2> <br>
-         <p>Santiago Rubio Felipo, Dayana Ribas González, Eduardo Lleida Solano, Alfonso Ortega Giménez and Antonio Miguel Artiaga </p>
-        <img src="https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/Imagenes/Vivolab.png" alt="Logo Grupo Investigación" class="logo">
-    </div>
-</subheader>
-<subheader>
-    <div class="logo-container">
-        <img src="https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/Imagenes/Iberspeech.png" alt="Logo Universidad" class="logo">
-        <h2> IberSPEECH 2024, Aveiro, Portugal. XIII Jornadas en Tecnologías del Habla and the VI Iberian SLTech. </h2>
-    </div>
-   
-    <p>11/11/2024-13/11/2024</p>
-    
-</subheader>
-    <br> <br>
-    <h2>TTS Data Augmentation</h2>
-<div class="container">
-    <label_audio for="speaker-select">Select Speaker:</label_audio>
-    <select id="speaker-select">
-        <!-- <option value="TVD-D-0001">TVD-D-0001</option>
-        <option value="TVD-D-0002">TVD-D-0002</option>
-        <option value="TVD-D-0003">TVD-D-0003</option>
-        <option value="TVD-D-0005">TVD-D-0005</option>
-        <option value="TVD-D-0006">TVD-D-0006</option>
-        <option value="TVD-D-0007">TVD-D-0007</option>
-        <option value="TVD-D-0008">TVD-D-0008</option>
-        <option value="TVD-D-0009">TVD-D-0009</option>
-        <option value="TVD-D-0010">TVD-D-0010</option>
-        <option value="TVD-D-0011">TVD-D-0011</option>
-        <option value="TVD-D-0012">TVD-D-0012</option>
-        <option value="TVD-D-0013">TVD-D-0013</option>-->
-        <!-- Add more speakers here -->
+    <h1>Dashboard de Experimentos</h1>
+    <label for="experiment-select">Selecciona un experimento:</label>
+    <select id="experiment-select" onchange="loadExperimentData()">
+        <option value="">Seleccione un experimento</option>
     </select>
-    
-    <div class="audio-player">
-        <!-- Original Audio -->
-        <div class="player-box">
-            <div class="label">Original Audio</div>
-            <audio id="original-audio" controls>
-                <source id="original-source" src="" type="audio/wav">
-                Your browser does not support the audio element.
-            </audio>
-            <div id="speakerInfo" class="speaker-info"></div>
-        </div>
-         
-        <!-- Fake Audios -->
-        <div class="player-box">
-            <div class="label">Data Augmentation TTS</div>
+    <div id="chart"></div>
 
-            <!-- Fake Audio List -->
-            <div class="fake-audios">
-                <div class="fake-audio-item">
-                    <div class="label">TTS Audio 1</div>
-                    <audio id="fake-audio-1" controls>
-                        <source id="fake-source-1" src="" type="audio/wav">
-                        Your browser does not support the audio element.
-                    </audio>
-                </div>
-
-                <div class="fake-audio-item">
-                    <div class="label">TTS Audio 2</div>
-                    <audio id="fake-audio-2" controls>
-                        <source id="fake-source-2" src="" type="audio/wav">
-                        Your browser does not support the audio element.
-                    </audio>
-                </div>
-
-                <div class="fake-audio-item">
-                    <div class="label">TTS Audio 3</div>
-                    <audio id="fake-audio-3" controls>
-                        <source id="fake-source-3" src="" type="audio/wav">
-                        Your browser does not support the audio element.
-                    </audio>
-                </div>
-                <!-- Añade más audios aquí -->
-            </div>
-        </div>
-    </div>
-   
-</div>
-
-<div class="container">
-    <h2>Automatic Voice Disorder Detection</h2><br>
-    
-    <table>
-        <tr>
-            <th>UMAP SS Representation</th>
-            <td>
-                <select id="showCategory" onchange="showCategory(this.value)">
-                    <option value="Choose">Choose Experiment</option>
-                    <!--<option value="Exp1">Experiment 1</option>
-                    <option value="Exp2">Experiment 2</option>
-                    <option value="Exp3">Experiment 3</option>
-                    <option value="Exp4">Experiment 4</option>-->
-                    <option value="Exp5">Experiment 5</option>
-                    <option value="Exp6">Experiment 6</option>
-                    <option value="Exp7">Experiment 7</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td><h3><center>First steps</center></h3></td>
-            <td><h3><center>Final steps</center></h3></td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <div id="contenido"></div>
-            </td>
-        </tr>
-    </table>
-</div>
-<div class="container">
-<h2></h2>
-    
-     <table>
-        <tr>
-            <th>Test UMAP SS Representation Evolution </th>
-            <td>
-                <select id="act_fold" onchange="choose_fold(this.value,document.getElementById('showCategory').value)">
-                    <option value="Choose"> Choose fold</option>
-                    <option value="Fold1">Fold 1</option>
-                    <option value="Fold2">Fold 2</option>
-                    <option value="Fold3">Fold 3</option>
-                    <option value="Fold4">Fold 4</option>
-                    <option value="Fold5">Fold 5</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td><h3><center>UMAP by Audio</center></h3></td>
-            <td><h3><center>UMAP mean by speaker</center></h3></td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <div id="contenido_steps"></div>
-            </td>
-        </tr>
-    </table>
-</div>
-        
-        <!--<img id="step-image" src="https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/Exp6/fold5/step6000_labels_speaker.html" alt="Imagen de Step">-->
-    
-    <label for="step-slider">Step:</label>
-    <input type="range" id="step-slider" min="1000" max="5000" value="5000" step="1000">
-    <span id="step-number">5000</span>
-</div>
-<footer>
-     <p>&copy; IberSPEECH 2024.Assessing the Impact and Potential of TTS for Pathological Voice Data Augmentation on Pathology Detection Systems.</p>
-</footer>
-    
-<!-- Script para cambiar las imágenes y los audios según el experimento seleccionado -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-<script>
-
-        var secondSelectCreated = false;
-        const baseUrl = "https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/UMAP/";
-        // Función para cargar contenido directamente
-        function loadContent(url1, url2) {
-            var contenidoDiv = document.getElementById("contenido");
-            if (url1 && url2) {
-                // var title = stepType === "first" ? "UMAP First Steps" : "UMAP Final Steps";
-                contenidoDiv.innerHTML = `
-                    <div class="image-container">
-                        <iframe src="${url1}" width="840" height="640"></iframe>
-                        <iframe src="${url2}" width="840" height="640"></iframe>
-                    </div>`;
-            } else {
-                contenidoDiv.innerHTML = ""; 
-            }
-        }
-
-        // Mostrar contenido según el experimento seleccionado
-        function showCategory(experiment) {
-            if (experiment === "Choose") {
-                loadContent(null, null);
-                return;
-            }
-            
-            const firstStepsUrl = `${baseUrl}${experiment}/${experiment}_first_steps.html`;
-            const finalStepsUrl = `${baseUrl}${experiment}/${experiment}_final_steps.html`;
-            loadContent(firstStepsUrl, finalStepsUrl);
-            
-            // Si ya se ha seleccionado un fold, cargar también los pasos
-            if (selectedFold !== 'Choose') {
-                const step = slider.value;
-                const step_image1 = `${baseUrl}${experiment}/${selectedFold}/step${step}_labels_audio.html`;
-                const step_image2 = `${baseUrl}${experiment}/${selectedFold}/step${step}_labels_speaker.html`;
-                loadContent_steps_image(step_image1, step_image2);
-            }
-        }    
-
-    
-        function updateAudioSources(speaker) {
-            // Update original audio source
-            const originalSource = document.getElementById("original-source");
-            originalSource.src = `https://santirf01.github.io/TFG_TTS_page.io/Thalento/Audios_Originales/${speaker}_D8_LECTURA.wav`;
-            document.getElementById("original-audio").load();
-
-            // Update fake audio sources
-            const fakeSource1 = document.getElementById("fake-source-1");
-            fakeSource1.src = `https://santirf01.github.io/TFG_TTS_page.io/Thalento/Audios/${speaker}/${speaker}_0001.wav`;
-            document.getElementById("fake-audio-1").load();
-
-            const fakeSource2 = document.getElementById("fake-source-2");
-            fakeSource2.src = `https://santirf01.github.io/TFG_TTS_page.io/Thalento/Audios/${speaker}/${speaker}_0002.wav`;
-            document.getElementById("fake-audio-2").load();
-
-            const fakeSource3 = document.getElementById("fake-source-3");
-            fakeSource3.src = `https://santirf01.github.io/TFG_TTS_page.io/Thalento/Audios/${speaker}/${speaker}_0003.wav`;
-            document.getElementById("fake-audio-3").load();
-        }
-
-        // Event listener for speaker selection change
-        const speakerSelect = document.getElementById("speaker-select");
-        speakerSelect.addEventListener("change", (event) => {
-            const selectedSpeaker = event.target.value;
-            updateAudioSources(selectedSpeaker);
-            updateSpeaker(selectedSpeaker);
-        });
-
-        // Set default speaker on load
-        window.onload = function() {
-            loadCSV();
-            updateAudioSources(document.getElementById("speaker-select").value);
-            updateSpeaker(document.getElementById("speaker-select").value);
-            //const initialStep = slider.value;
-            //const step_image1 = `${baseUrl}${experiment}/${selectedFold}/step${step}_labels_audio.html`;
-            //const step_image2 = `${baseUrl}${experiment}/${selectedFold}/step${step}_labels_speaker.html`;
-            //loadContent_steps_image(step_image1, step_image2);
-        };
-    // CSV
-        let speakersData = {};
-        let selectedFold = 'fold5';  // Valor por defecto
-        // Función para cargar y procesar el CSV usando PapaParse
-        function loadCSV() {
-            Papa.parse('https://santirf01.github.io/DA_TTS_THL_AVDD.github.io/speaker_info.csv', {
-                download: true,
-                header: true,
-                complete: function(results) {
-                    speakersData = results.data;
-                    populateSpeakerSelect();
-                }
-            });
-        }
-        // Función para llenar el selector de speakers
-        function populateSpeakerSelect() {
-            const select = document.getElementById('speaker-select');
-            select.innerHTML = ""; // Limpiar antes de añadir nuevas opciones
-            speakersData.forEach(speaker => {
-                const option = document.createElement('option');
-                option.value = speaker.Código;
-                option.text = speaker.Código;
-                select.appendChild(option);
-            });
-        }
-
-        
-        
-        // Función para actualizar la información y los audios cuando se selecciona un speaker
-        function updateSpeaker(selectedSpeaker) {
-            const speakerInfo = speakersData.find(speaker => speaker.Código === selectedSpeaker);
-        
-            if (speakerInfo) {
-                // Actualizar información del speaker
-                document.getElementById('speakerInfo').innerHTML = `
-                    <strong>Name:</strong> ${speakerInfo.Código}<br>
-                    <strong>Age:</strong> ${speakerInfo.Edad}<br>
-                    <strong>Gender:</strong> ${speakerInfo.Sexo}<br>
-                    <strong>Diagnosis:</strong> ${speakerInfo.Diagnóstico}<br>
-                    <strong>Severity (GRBAS-1):</strong> ${speakerInfo['GRBAS-1']}<br>
-                    <strong>Severity (GRBAS-2):</strong> ${speakerInfo['GRBAS-2']}`;
-            }
-        }
-        function choose_fold(fold, experiment) {
-            if (fold !== "Choose" && experiment !== "Choose") {
-                selectedFold = fold.toLowerCase();
-                const step = slider.value;
-                const step_image1 = `${baseUrl}${experiment}/${selectedFold}/step${step}_labels_audio.html`;
-                const step_image2 = `${baseUrl}${experiment}/${selectedFold}/step${step}_labels_speaker.html`;
-                console.log(step_image1, step_image2);
-                loadContent_steps_image(step_image1, step_image2);
-            }
-        }
-
-    
-        const slider = document.getElementById('step-slider');
-        const image = document.getElementById('step-image');
-        const stepNumber = document.getElementById('step-number');
-
-        function loadContent_steps_image(url1, url2) {
-            var contenidoDiv = document.getElementById("contenido_steps");
-            if (url1 && url2) {
-                contenidoDiv.innerHTML = `
-                    <div class="image-container">
-                        <iframe src="${url1}" width="840" height="640"></iframe>
-                        <iframe src="${url2}" width="840" height="640"></iframe>
-                    </div>`;
-            } else {
-                contenidoDiv.innerHTML = ""; 
-            }
-        }
-
-
-        slider.addEventListener('input', function() {
-            const step = slider.value;
-            stepNumber.textContent = step;
-                // Verifica si se ha seleccionado un experimento
-            const experiment = document.getElementById('showCategory').value;
-            console.log(experiment);
-            if (experiment === "Choose") {
-                console.log("Please select an experiment first.");
-                return; // Si no se ha seleccionado un experimento, no continúes.
-            }
-            // Actualizar la fuente de la imagen
-            const step_image1 = `${baseUrl}${experiment}/${selectedFold}/step${step}_labels_audio.html`;
-            const step_image2 = `${baseUrl}${experiment}/${selectedFold}/step${step}_labels_speaker.html`;
-            loadContent_steps_image(step_image1, step_image2);
-        });
-    
-    </script>
-
+    <script src="scripts/app.js"></script>
 </body>
+<script>
+// Función para cargar la lista de archivos .txt de la carpeta "data"
+async function loadExperimentList() {
+    const response = await fetch('data/');
+    const text = await response.text();
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(text, 'text/html');
+    const fileList = Array.from(doc.querySelectorAll('a')).map(link => link.href).filter(file => file.endsWith('.txt'));
+
+    const select = document.getElementById('experiment-select');
+    fileList.forEach(file => {
+        const option = document.createElement('option');
+        option.value = file;
+        option.textContent = file.replace('data/', '').replace('.txt', '');
+        select.appendChild(option);
+    });
+}
+
+// Función para cargar los datos de un experimento y generar la gráfica
+async function loadExperimentData() {
+    const select = document.getElementById('experiment-select');
+    const experimentFile = select.value;
+
+    if (experimentFile) {
+        const response = await fetch(experimentFile);
+        const data = await response.text();
+
+        const parsedData = parseExperimentData(data);
+        plotData(parsedData);
+    }
+}
+
+// Función para convertir el contenido del archivo .txt a un formato entendible
+function parseExperimentData(data) {
+    const lines = data.split('\n');
+    const legend = lines[0].trim();
+    const xValues = [];
+    const yValues = [];
+
+    for (let i = 1; i < lines.length; i++) {
+        const [x, y] = lines[i].trim().split(/\s+/);
+        if (x && y) {
+            xValues.push(parseFloat(x));
+            yValues.push(parseFloat(y));
+        }
+    }
+    return { legend, xValues, yValues };
+}
+
+// Función para graficar los datos usando Plotly
+function plotData({ legend, xValues, yValues }) {
+    const trace = {
+        x: xValues,
+        y: yValues,
+        mode: 'lines+markers',
+        name: legend,
+        line: { shape: 'linear' }
+    };
+
+    const layout = {
+        title: `Gráfico del experimento: ${legend}`,
+        xaxis: { title: 'Iteraciones' },
+        yaxis: { title: 'Valores' }
+    };
+
+    Plotly.newPlot('chart', [trace], layout);
+}
+
+// Inicializa el listado de experimentos cuando la página carga
+document.addEventListener('DOMContentLoaded', loadExperimentList);
+</script>
+</html>
 
