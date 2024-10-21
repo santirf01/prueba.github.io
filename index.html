@@ -172,7 +172,7 @@ async function toggleExperiment(folder) {
             const data = await response.text();
             const parsedData = parseExperimentData(data, folder);
             console.log(parsedData); // Verifica la estructura de datos
-            addDataToPlot(parsedData);
+            addDataToPlot(parsedData.data);
         } catch (error) {
             console.error('Error loading experiment data:', error);
             alert('Error loading experiment data. Please try again.');
@@ -181,6 +181,9 @@ async function toggleExperiment(folder) {
 }
 
 function parseExperimentData(data, folder) {
+    const lines = data.split('\n');
+    const legend = lines.shift().trim();
+    
     const parsedData = data.split('\n').reduce((acc, line) => {
         const [xValue, yValue] = line.split(' '); // Ajusta según el formato de tus datos
         if (xValue && yValue) {
@@ -191,11 +194,14 @@ function parseExperimentData(data, folder) {
     }, { x: [], y: [] });
     console.log(parsedData);
     return {
-        x: parsedData.x,
-        y: parsedData.y,
-        name: folder,
-        type: 'scatter',
-        mode: 'lines+markers' // Opcional, ajusta según tus necesidades
+        legend: legend,
+        data: {
+            x: parsedData.x,
+            y: parsedData.y,
+            name: legend,
+            type: 'scatter',
+            mode: 'lines+markers' // Opcional, ajusta según tus necesidades
+        }
     };
 }
 
