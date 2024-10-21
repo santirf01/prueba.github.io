@@ -183,6 +183,7 @@ async function toggleExperiment(folder) {
 function parseExperimentData(data, folder) {
     const lines = data.split('\n');
     const legend = lines.shift().trim();
+    const [xlabel, ylabel] = lines.shift().trim().split(' '); // Extrae y elimina la segunda línea
     
     const parsedData = lines.reduce((acc, line) => {
         console.log(line);
@@ -196,6 +197,8 @@ function parseExperimentData(data, folder) {
     console.log(parsedData);
     return {
         legend: legend,
+        xlabel: xlabel,
+        ylabel: ylabel,
         data: {
             x: parsedData.x,
             y: parsedData.y,
