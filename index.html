@@ -212,7 +212,7 @@ function parseExperimentData(data, folder) {
 
 function addDataToPlot(data) {
     const chartDiv = document.getElementById('chart');
-    Plotly.addTraces(chartDiv, [data]); // Añade como un array
+    Plotly.addTraces(chartDiv, [data.x data.y]); // Añade como un array
 }
 
 
