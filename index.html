@@ -211,7 +211,9 @@ function parseExperimentData(data, folder) {
 
 function addDataToPlot(data, xlabel, ylabel) {
     const chartDiv = document.getElementById('chart');
-    
+    if (!chartDiv.data) {
+        chartDiv.data = [];
+    }
     // Configuración del layout para incluir labels
     const layout = {
         xaxis: {
