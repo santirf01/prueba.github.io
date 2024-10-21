@@ -172,7 +172,7 @@ async function toggleExperiment(folder) {
             const data = await response.text();
             const parsedData = parseExperimentData(data, folder);
             console.log(parsedData); // Verifica la estructura de datos
-            addDataToPlot(parsedData.data);
+            addDataToPlot(parsedData.data,parsedData.xlabel, parsedData.ylabel);
         } catch (error) {
             console.error('Error loading experiment data:', error);
             alert('Error loading experiment data. Please try again.');
@@ -209,10 +209,21 @@ function parseExperimentData(data, folder) {
     };
 }
 
-
-function addDataToPlot(data) {
+function addDataToPlot(data, xlabel, ylabel) {
     const chartDiv = document.getElementById('chart');
-    Plotly.addTraces(chartDiv, [data.x data.y]); // Añade como un array
+    
+    // Configuración del layout para incluir labels
+    const layout = {
+        xaxis: {
+            title: xlabel
+        },
+        yaxis: {
+            title: ylabel
+        }
+    };
+
+    Plotly.addTraces(chartDiv, [data]); // Añade la traza de datos
+    Plotly.update(chartDiv, {}, layout); // Aplica el layout con las etiquetas
 }
 
 
