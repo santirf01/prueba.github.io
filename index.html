@@ -182,14 +182,14 @@ async function toggleExperiment(folder) {
 
 function parseExperimentData(data, folder) {
     const parsedData = data.split('\n').reduce((acc, line) => {
-        const [xValue, yValue] = line.split(','); // Ajusta según el formato de tus datos
+        const [xValue, yValue] = line.split(' '); // Ajusta según el formato de tus datos
         if (xValue && yValue) {
             acc.x.push(parseFloat(xValue));
             acc.y.push(parseFloat(yValue));
         }
         return acc;
     }, { x: [], y: [] });
-
+    console.log(parsedData);
     return {
         x: parsedData.x,
         y: parsedData.y,
