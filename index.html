@@ -109,6 +109,12 @@ footer p {
     background-color: #0056b3;
 }
 
+.experiment-button.active {
+    background-color: #0056b3;
+    color: #ffffff;
+}
+
+
         
     </style>
 </head>
@@ -159,12 +165,14 @@ async function loadExperimentList() {
 async function toggleExperiment(folder) {
     const experimentFile = `https://raw.githubusercontent.com/santirf01/Data_logger/refs/heads/main/${folder}/train.txt`;
     const chartDiv = document.getElementById('chart');
+    const button = document.querySelector(`button[data-folder="${folder}"]`);
     const existingTraces = chartDiv.data || [];
 
     const isAlreadyAdded = existingTraces.some(trace => trace.name === folder);
 
     if (isAlreadyAdded) {
         removeExperimentFromPlot(folder);
+        button.classList.remove('active'); // Desactivar el botón
     } else {
         try {
             const response = await fetch(experimentFile);
@@ -173,6 +181,7 @@ async function toggleExperiment(folder) {
             const parsedData = parseExperimentData(data, folder);
             console.log(parsedData); // Verifica la estructura de datos
             addDataToPlot(parsedData.data,parsedData.xlabel, parsedData.ylabel);
+            button.classList.add('active'); // Activar el botón
         } catch (error) {
             console.error('Error loading experiment data:', error);
             alert('Error loading experiment data. Please try again.');
@@ -244,7 +253,7 @@ function removeExperimentFromPlot(legend) {
     const traceIndex = chartDiv.data.findIndex(trace => trace.name === legend);
 
     if (traceIndex !== -1) {
-        Plotly.deleteTraces('chart', traceIndex);
+        Plotly.deleteTraces(chartDiv, traceIndex);    
     }
 }
 
