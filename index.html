@@ -209,11 +209,20 @@ function parseExperimentData(data, folder) {
     };
 }
 
+    
 function addDataToPlot(data, xlabel, ylabel) {
     const chartDiv = document.getElementById('chart');
+    
+    // Inicializa chartDiv.data si no existe
     if (!chartDiv.data) {
         chartDiv.data = [];
+        // Inicializa el gráfico con una traza vacía para evitar errores
+        Plotly.newPlot(chartDiv, [], {
+            xaxis: { title: xlabel },
+            yaxis: { title: ylabel }
+        });
     }
+    
     // Configuración del layout para incluir labels
     const layout = {
         xaxis: {
