@@ -184,7 +184,7 @@ function parseExperimentData(data, folder) {
     const lines = data.split('\n');
     const legend = lines.shift().trim();
     
-    const parsedData = data.split('\n').reduce((acc, line) => {
+    const parsedData = lines.reduce((acc, line) => {
         const [xValue, yValue] = line.split(' '); // Ajusta según el formato de tus datos
         if (xValue && yValue) {
             acc.x.push(parseFloat(xValue));
